@@ -1,0 +1,15 @@
+<IfModule mod_rewrite.c>
+    # Turn on the Rewrite Engine
+    RewriteEngine On
+    
+    # If the file or directory exists, show it
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^(.+) - [PT,L]
+    
+    # Blank queries get sent to the index
+    RewriteRule ^$ index.php [L]
+    
+    # All other queries get sent to the index as index.php/whatever
+    RewriteRule ^(.*)$ index.php/$1 [L]
+</IfModule>
