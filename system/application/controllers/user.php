@@ -4,12 +4,26 @@ class User extends Controller {
 
 	function User()
 	{
-		parent::Controller();	
+		parent::Controller();
+		
+		$this->load->helper('form');
+		$this->load->helper('url');
 	}
 	
 	function index()
 	{
 		$this->load->view('welcome_message');
+	}
+	
+	function signin()
+	{
+		
+	}
+	
+	function signup()
+	{
+		if($_POST == NULL)
+			$this->load->view('signup');
 	}
 }
 
