@@ -6,7 +6,7 @@
 
 <h1>Welcome to MediaBorrow!</h1>
 
-<p>New to MediaBorrow? please <?=anchor('user/signup', 'sign up' )?>.</p>
+<p>New to MediaBorrow? please <?=anchor('signup', 'sign up' )?>.</p>
 
 <p>Or, please sign in:</p>
 <?=form_open('user/signin')?>

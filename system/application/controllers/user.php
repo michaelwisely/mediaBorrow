@@ -12,7 +12,7 @@ class User extends Controller {
 	
 	function index()
 	{
-		$this->load->view('welcome_message');
+		$this->load->view('welcome');
 	}
 	
 	function signin()

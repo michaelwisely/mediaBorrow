@@ -43,6 +43,11 @@
 $route['default_controller'] = "user";
 $route['scaffolding_trigger'] = "";
 
+$route['signup'] = 'user/signup';
+
+//delete these later! this is only for phase 2
+$route['person/media/all'] = 'media/show';
+
 
 /* End of file routes.php */
 /* Location: ./system/application/config/routes.php */
