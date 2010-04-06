@@ -1,10 +1,10 @@
 <?php
 
-class Media extends Controller {
+class Media extends MY_controller {
 
-	function Media()
+	function __construct()
 	{
-		parent::Controller();
+		parent::__construct();
 		
 		$this->load->helper('form');
 		$this->load->helper('url');
@@ -18,5 +18,10 @@ class Media extends Controller {
 	function show()
 	{
 		$this->load->view('media_list');
+	}
+	
+	function add()
+	{
+		$this->load->view('media_add');
 	}
 }

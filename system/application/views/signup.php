@@ -4,11 +4,8 @@
 </head>
 <body>
 
-<h1>Welcome to MediaBorrow!</h1>
+<h1>Sign up on MediaBorrow!</h1>
 
-<p>New to MediaBorrow? please <?=anchor('user/signup', 'sign up' )?>.</p>
-
-<p>Or, please sign in:</p>
 <?=form_open('user/signup')?>
 Username: <?=form_input('user_id');?><br />
 Password: <?=form_input('password');?><br />
