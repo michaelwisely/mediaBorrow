@@ -8,6 +8,8 @@ class User extends Controller {
 		
 		$this->load->helper('form');
 		$this->load->helper('url');
+		
+		$this->load->model('user_model');
 	}
 	
 	function index()
@@ -15,9 +17,26 @@ class User extends Controller {
 		$this->load->view('welcome');
 	}
 	
-	function signin()
+	function login()
 	{
+		if($_POST == NULL)
+			redirect('');
+		else
+		{
+			if($this->user_model->login($_POST['user_id'], $_POST['password']))
+				echo 'awesome';
+			else
+			{
+				echo 'not awesome';
+			}
+		}
+	}
+	
+	function logout()
+	{
+		$this->user_model->logout();
 		
+		redirect('');
 	}
 	
 	function signup()

@@ -43,7 +43,10 @@
 $route['default_controller'] = "user";
 $route['scaffolding_trigger'] = "";
 
+//login,logout, signup type pages
 $route['signup'] = 'user/signup';
+$route['login'] = 'user/login';
+$route['logout'] = 'user/logout';
 
 //delete these later! this is only for phase 2
 $route['person/media/all'] = 'media/show';

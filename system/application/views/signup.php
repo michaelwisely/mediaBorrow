@@ -8,8 +8,8 @@
 
 <?=form_open('user/signup')?>
 Username: <?=form_input('user_id');?><br />
-Password: <?=form_input('password');?><br />
-Repeat Password: <?=form_input('repeat_password');?><br />
+Password: <?=form_password('password');?><br />
+Repeat Password: <?=form_password('repeat_password');?><br />
 <br />
 First Name: <?=form_input('fname');?><br />
 Last Name: <?=form_input('lname');?><br />
