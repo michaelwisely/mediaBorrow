@@ -6,8 +6,6 @@ class MY_Controller extends Controller
 	{
 		parent::Controller();
 		
-		$this->load->helper('url');
-		
 		//check if user is logged in
 		if(!$this->session->userdata('logged_in'))
 			redirect('');
