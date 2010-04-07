@@ -7,7 +7,6 @@ class Media extends MY_controller {
 		parent::__construct();
 		
 		$this->load->helper('form');
-		$this->load->helper('url');
 	}
 	
 	function index()
