@@ -21,7 +21,7 @@ Class User_model extends Model
 		if ($openSesame)
 		{
 			//is logged in
-			$this->session->set_userdata('logged_in', 'true');
+			$this->session->set_userdata('logged_in', true);
 			//username
 			$this->session->set_userdata('user_id', $user_id);
 		}
@@ -35,7 +35,8 @@ Class User_model extends Model
 	
 	function logout()
 	{
-		$this->session->unset_userdata();
+		$this->session->unset_userdata('user_id');
+		$this->session->set_userdata('logged_in', false);
 	}
 	
 }

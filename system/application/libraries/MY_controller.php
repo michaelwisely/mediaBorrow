@@ -9,8 +9,7 @@ class MY_Controller extends Controller
 		$this->load->helper('url');
 		
 		//check if user is logged in
-		
-		
-		//redirect('');
+		if(!$this->session->userdata('logged_in'))
+			redirect('');
 	}
 }
