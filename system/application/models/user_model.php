@@ -9,12 +9,20 @@ Class User_model extends Model
 	
 	function login($user_id, $password)
 	{
+	    //open up a conenction to the server and pick the correct
+	    //  database
+		$con = mysql_connect("localhost","cs238","databases");
+		mysql_select_db("mediaBorrow", $con);
+
 		//check to see if the username and password are correct
 		$openSesame = false;
 		
-		$query = $this->db->get_where('user', array('user_id' => $user_id));
-		if ($query->num_rows() != 0)
-			if($query->row()->password == $password)
+		$table = mysql_query("SELECT *
+				     FROM USERS u
+				     WHERE u.user_id='".$user_id."'");
+		$row = mysql_fetch_array($table);
+		if (count($row) > 0)
+			if($row['password'] == $password)
 				$openSesame = true;
 		
 		//if login is correct
@@ -30,7 +38,10 @@ Class User_model extends Model
 			$this->session->sess_destroy();
 		}
 		
+		mysql_close($con);
+		
 		return $openSesame;
+	    
 	}
 	
 	function logout()
