@@ -2,7 +2,7 @@
 
 Class User_model extends Model
 {
-	function Show_model()
+	function User_model()
 	{
 		parent::Model();
 	}
