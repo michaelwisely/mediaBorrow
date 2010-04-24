@@ -89,6 +89,9 @@ CREATE TABLE COMMENTS(
 	FOREIGN KEY (media_id) REFERENCES MEDIA(media_id)
 )ENGINE = InnoDB;
 
+INSERT INTO ZIPS
+VALUES ('65401', 'Rolla', 'Missouri');
+
 INSERT INTO USERS
 VALUES ('mike',
     'michaelwisely@gmail.com',
