@@ -1,6 +1,6 @@
 <?php
 
-class Queries
+class Queries 
 {
 	function __construct()
 	{
@@ -33,59 +33,64 @@ class Queries
 						$genre, $title, $type,
 						NULL, NULL, NULL, $artist, 
 						NULL, NULL);");
-            }
+		}
 
-            else if($type == "movie")
-            {
-                $this->db->query("INSERT INTO MEDIA 
-                        VALUES($media_id, $user_id, $genre,
-                            $title, $type, NULL, NULL,
-                            NULL, NULL, $writer, $director);");
-            }
-	    return true;
-        }
+		else if($type == "movie")
+		{
+			$this->db->query("INSERT INTO MEDIA 
+				VALUES($media_id, $user_id, $genre,
+					$title, $type, NULL, NULL,
+					NULL, NULL, $writer, $director);");
+		}
+		return true;
+	}
 
-    function requestFrienship($user_id1, $user_id2)
-    {
-        $this->db->query("INSERT INTO FRIENDS
-                    VALUES($user_id1, $user_id2, true);");
-	return true;
-    }
-    
-    function acceptFriendRequest($userid1, $user_id2)
-    {
-        $this->db->query("UPDATE FRIENDS
-                SET pending = false
-                WHERE uid1 = $user_id1 AND uid2 = $user_id2;");
-	return true;
-    }
-    function getFriendRequests($userid)
-    {
-        $table = $this->db->query("SELECT userid2
-				FROM FRIENDS
-				WHERE userid1 = $userid
-				UNION
-				SELECT userid1
-				FROM FRIENDS
-				WHERE userid2 = $userid;");
-        return $table;
-    }
-}
+	function requestFrienship($user_id1, $user_id2)
+	{
+		$this->db->query("INSERT INTO FRIENDS
+			VALUES($user_id1, $user_id2, true);");
+		return true;
+	}
+	
+	function acceptFriendRequest($userid1, $user_id2)
+	{
+		$this->db->query("UPDATE FRIENDS
+			SET pending = false
+			WHERE uid1 = $user_id1 AND uid2 = $user_id2;");
+		return true;
+	}
+	function getFriendRequests($userid)
+	{
+		$table = $this->db->query("SELECT userid2
+					FROM FRIENDS
+					WHERE userid1 = $userid
+					UNION
+					SELECT userid1
+					FROM FRIENDS
+					WHERE userid2 = $userid;");
+		return $table;
+	}
+	function addcomment($user_id, $media_id, $comment_text, $rating)
+	{
+		$curr_time = getdate();
+		$time = $curr_time['year']."-".$curr_time['mon']."-".
+			$curr_time['mday']." ".$curr_time['hours'].":".
+			$curr_time['minutes'].":".$curr_time['seconds'];
+		$this->db->query("INSERT INTO COMMENTS
+				 VALUES($user_id, $media_id,
+					$comment_text, $rating, $time);");
+	}
+	function requestBorrow()
+	{
+		if user has made a request for this item before:
+			UPDATE borrows
+			SET status = 'pending', start_date = NULL, end_date = NULL
+			WHERE user_id = $borrower_id AND media_id = $media_id;
+		else
+			INSERT INTO borrows VALUES($borrower_id, $media_id, "pending", NULL, NULL);
+	}
 
-// 
-//comment
-//
-//INSERT INTO comments VALUES($user_id, $media_id, $comment_text, $rating, time);
-// 
-//borrow
-//
-//if user has made a request for this item before:
-//   UPDATE borrows
-//   SET status = 'pending', start_date = NULL, end_date = NULL
-//   WHERE user_id = $borrower_id AND media_id = $media_id;
-//else
-//   INSERT INTO borrows VALUES($borrower_id, $media_id, "pending", NULL, NULL);
-// 
+ 
 //approveBorrow
 //
 //UPDATE borrows
@@ -123,7 +128,8 @@ class Queries
 //updateUserProfile
 //
 //UPDATE user
-//SET email = $email, password = $password, zip = $zip, city = $city, state = $state, fname = $fname, lname = $lname, dob = $dob, site_mod = $site_mod, area = $area
+//SET email = $email, password = $password, zip = $zip, city = $city, state = $state, f
+//name = $fname, lname = $lname, dob = $dob, site_mod = $site_mod, area = $area
 //WHERE user_id = $user_id;
 // 
 // 
@@ -252,5 +258,4 @@ class Queries
 //AND status = 'returned' 
 //AND user_id = $user_id;
 //
-//}
-//    
+}
