@@ -1,11 +1,12 @@
 <?php
 
-class Queries 
+class Queries extends Model
 {
-	function __construct()
+	function Queries()
 	{
+		parent::Model();
 	}
-	
+
 	function addNewUser($user_id, $email, $password, $zip, $fname, $lname, $dob)
 	{
 		$this->db->query("INSERT INTO USERS
@@ -15,7 +16,9 @@ class Queries
 		return true;
 	}
 
-	function addMedia($media_id, $user, $genre, $title, $type, $author, $publisher, $ISBN, $artist, $writer, $director)
+	function addMedia($media_id, $user, $genre, $title, $type,
+			  $author, $publisher, $ISBN, $artist,
+			  $writer, $director)
 	{
 		if($type == "book")
 		{
@@ -34,7 +37,6 @@ class Queries
 						NULL, NULL, NULL, $artist, 
 						NULL, NULL);");
 		}
-
 		else if($type == "movie")
 		{
 			$this->db->query("INSERT INTO MEDIA 
@@ -51,7 +53,7 @@ class Queries
 			VALUES($user_id1, $user_id2, true);");
 		return true;
 	}
-	
+
 	function acceptFriendRequest($userid1, $user_id2)
 	{
 		$this->db->query("UPDATE FRIENDS
@@ -59,6 +61,7 @@ class Queries
 			WHERE uid1 = $user_id1 AND uid2 = $user_id2;");
 		return true;
 	}
+
 	function getFriendRequests($userid)
 	{
 		$table = $this->db->query("SELECT userid2
@@ -70,6 +73,7 @@ class Queries
 					WHERE userid2 = $userid;");
 		return $table;
 	}
+
 	function addcomment($user_id, $media_id, $comment_text, $rating)
 	{
 		$curr_time = getdate();
@@ -80,14 +84,13 @@ class Queries
 				 VALUES($user_id, $media_id,
 					$comment_text, $rating, $time);");
 	}
-	function requestBorrow()
+
+	function requestBorrow($borrower_id, $media_id)
 	{
-		if user has made a request for this item before:
-			UPDATE borrows
-			SET status = 'pending', start_date = NULL, end_date = NULL
-			WHERE user_id = $borrower_id AND media_id = $media_id;
-		else
-			INSERT INTO borrows VALUES($borrower_id, $media_id, "pending", NULL, NULL);
+		
+		$this->db->query("INSERT INTO BORROWS
+				 VALUES($borrower_id, $media_id,
+					\"pending\", NULL, NULL);");
 	}
 
  
