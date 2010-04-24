@@ -12,7 +12,7 @@ Class User_model extends Model
 		//check to see if the username and password are correct
 		$openSesame = false;
 		
-		$query = $this->db->get_where('user', array('user_id' => $user_id));
+		$query = $this->db->get_where('USERS', array('user_id' => $user_id));
 		if ($query->num_rows() != 0)
 			if($query->row()->password == $password)
 				$openSesame = true;

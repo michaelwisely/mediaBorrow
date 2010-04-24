@@ -7,13 +7,20 @@ class Queries extends Model
 		parent::Model();
 	}
 
-	function addNewUser($user_id, $email, $password, $zip, $fname, $lname, $dob)
+	function addNewUser($user_id, $email, $password, $zip, $fname, $lname, $day, $month, $year)
 	{
+		$zips = "SELECT zip FROM ZIPS WHERE zip = $zip";
+		$zips = $this->db->query($zips);
+		if($zips->num_rows() == 0)
+			$this->db->query("INSERT INTO ZIPS
+				VALUES($zip, 'nonsense', 'nonsense')");
+		
+		$dob = mktime(0, 0, 0, $month, $day, $year);
+		
 		$this->db->query("INSERT INTO USERS
-				VALUES($user_id, $email,
-				$password, $zip,
-				$fname, $lname, $dob, NULL);");
-		return true;
+				VALUES(\"$user_id\", \"$email\",
+				\"$password\", $zip,
+				\"$fname\", \"$lname\", $dob, NULL);");
 	}
 
 	function addMedia($media_id, $user, $genre, $title, $type,

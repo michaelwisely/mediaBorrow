@@ -29,7 +29,7 @@ class Install extends Controller {
 			$zips = 'CREATE TABLE ZIPS( zip char(5) NOT NULL, city varchar(30) NOT NULL, state varchar(20) NOT NULL, PRIMARY KEY (zip) )ENGINE = InnoDB;';
 			$this->db->query($zips);
 			
-			$users = 'CREATE TABLE USERS( user_id varchar(20) NOT NULL, email varchar(50) NOT NULL UNIQUE, password varchar(50) NOT NULL, zip char(5) NOT NULL, fname varchar(30) NOT NULL, lname varchar(30) NOT NULL, dob date, area varchar(20), PRIMARY KEY (user_id), FOREIGN KEY (zip) REFERENCES ZIPS(zip) )ENGINE = InnoDB;';
+			$users = 'CREATE TABLE USERS( user_id varchar(20) NOT NULL, email varchar(50) NOT NULL UNIQUE, password varchar(50) NOT NULL, zip char(5) NOT NULL, fname varchar(30) NOT NULL, lname varchar(30) NOT NULL, dob integer, area varchar(20), PRIMARY KEY (user_id), FOREIGN KEY (zip) REFERENCES ZIPS(zip) )ENGINE = InnoDB;';
 			$this->db->query($users);
 			
 			$suggestions = 'CREATE TABLE SUGGESTIONS( user_id varchar(20) NOT NULL, topic varchar(100) NOT NULL, stamp timestamp NOT NULL, suggestion text, PRIMARY KEY (user_id, stamp), FOREIGN KEY (user_id) REFERENCES USERS(user_id) )ENGINE = InnoDB;';
@@ -51,9 +51,11 @@ class Install extends Controller {
 			$this->db->query($comments);
 			
 			//insert the first user into the database
+			$this->queries->addNewUser($_POST['user_id'], $_POST['email'], $_POST['password'], $_POST['zip'], $_POST['fname'], $_POST['lname'], $_POST['day'], $_POST['month'], $_POST['year']);
 			
 			//show confirmation
-			$this->load->view('installed', $_POST);
+			$data['user_id'] = $_POST['user_id'];
+			$this->load->view('installed', $data);
 		}
 	}
 
