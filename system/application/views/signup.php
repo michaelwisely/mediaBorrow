@@ -38,8 +38,6 @@ for ($i = 0; $i < 31; $i++)
 
 ?>
 Date of Birth: <?=form_dropdown('month', $month)?> <?=form_dropdown('day', $day)?> <?=form_input('year', 'year');?><br/>
-City: <?=form_input('city');?><br />
-State: <?=form_input('state');?><br />
 Zip: <?=form_input('zip');?><br />
 <input type="submit" value="Sign up" />&nbsp;&nbsp;&nbsp;&nbsp;<a href="<?=site_url('')?>" style="color:red">cancel</a>
 </form>
