@@ -4,24 +4,24 @@
 --  engine for each table, that way we can use
 --  foreign keys. Yay!
 
-CREATE TABLE USERS(
-	user_id varchar(20) NOT NULL,
-	email varchar(50) NOT NULL UNIQUE,
-	password varchar(50) NOT NULL,
-	zip char(5),
-	fname varchar(30) NOT NULL,
-	lname varchar(30) NOT NULL,
-	dob date,
-	area varchar(20),
-	PRIMARY KEY (user_id)
-)ENGINE = InnoDB;
-
 CREATE TABLE ZIPS(
 	zip char(5) NOT NULL,
 	city varchar(30) NOT NULL,
 	state varchar(20) NOT NULL,
-	PRIMARY KEY (zip),
-	FOREIGN KEY (zip) REFERENCES USERS(zip)
+	PRIMARY KEY (zip)
+)ENGINE = InnoDB;
+
+CREATE TABLE USERS(
+	user_id varchar(20) NOT NULL,
+	email varchar(50) NOT NULL UNIQUE,
+	password varchar(50) NOT NULL,
+	zip char(5) NOT NULL,
+	fname varchar(30) NOT NULL,
+	lname varchar(30) NOT NULL,
+	dob date,
+	area varchar(20),
+	PRIMARY KEY (user_id),
+	FOREIGN KEY (zip) REFERENCES ZIPS(zip)
 )ENGINE = InnoDB;
 
 CREATE TABLE SUGGESTIONS(
