@@ -1,8 +1,8 @@
 <?php
 
-class Queries extends Model
+class Query extends Model
 {
-	function Queries()
+	function Query()
 	{
 		parent::Model();
 	}

@@ -51,7 +51,7 @@ class Install extends Controller {
 			$this->db->query($comments);
 			
 			//insert the first user into the database
-			$this->queries->addNewUser($_POST['user_id'], $_POST['email'], $_POST['password'], $_POST['zip'], $_POST['fname'], $_POST['lname'], $_POST['day'], $_POST['month'], $_POST['year']);
+			$this->query->addNewUser($_POST['user_id'], $_POST['email'], $_POST['password'], $_POST['zip'], $_POST['fname'], $_POST['lname'], $_POST['day'], $_POST['month'], $_POST['year']);
 			
 			//show confirmation
 			$data['user_id'] = $_POST['user_id'];
