@@ -68,16 +68,17 @@ class Query extends Model
 					AND uid2 = \"$user_id2\";");
 	}
 
-	function getFriendRequests($userid)
+	function getFriendRequests($user_id)
 	{
-		$table = $this->db->query("SELECT userid2
+		return $this->db->query("SELECT user_id2
 					FROM FRIENDS
-					WHERE userid1 = \"$userid\"
+					WHERE pending = ‘true’
+					  AND user_id1 = \"$user_id\"
 					UNION
-					SELECT userid1
+					SELECT user_id1
 					FROM FRIENDS
-					WHERE userid2 = \"$userid\";");
-		return $table;
+					WHERE pending = ‘true’
+					  AND user_id2 = \"$user_id\" ;");
 	}
 
 	function addcomment($user_id, $media_id, $comment_text, $rating)
@@ -151,6 +152,7 @@ class Query extends Model
 							\"$new_user_email\",
 							\"$new_user_name\");");
 	}
+	
 	function updateUserProfile($email, $password, $zip, $fname, $lname, $dob, $area)
 	{
 		return $this->db->simple_query("UPDATE USERS
@@ -204,19 +206,6 @@ class Query extends Model
 		return $this->db->query("SELECT comment
 					FROM COMMENTS
 					WHERE media_id = $media_id;");
-	}
-
-	function getFriendRequests($user_id)
-	{
-		return $this->db->query*"SELECT user_id2
-					FROM FRIENDS
-					WHERE pending = ‘true’
-					  AND user_id1 = \"$user_id\"
-					UNION
-					SELECT user_id1
-					FROM FRIENDS
-					WHERE pending = ‘true’
-					  AND user_id2 = \"$user_id\";");
 	}
 
 	function getBorrowRequests($user_id)
@@ -283,7 +272,7 @@ class Query extends Model
 					  AND m.media_id = c.media_id
 					  AND rating = ( SELECT MAX(rating)
 							FROM comments );");
-		return array("books"=>$books, "cds"=>$cds, "movies"=>$movies)
+		return array("books"=>$books, "cds"=>$cds, "movies"=>$movies);
 	}
 
  
