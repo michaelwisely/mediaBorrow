@@ -52,7 +52,7 @@ class User extends Controller {
 		if($_POST == NULL)
 		{
 			$data['error'] = '';
-			$this->load->view('signup');
+			$this->load->view('signup', $data);
 		}
 		else
 		{
