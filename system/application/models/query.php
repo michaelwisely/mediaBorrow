@@ -24,6 +24,13 @@ class Query extends Model
 					\"$password\", $zip,
 					\"$fname\", \"$lname\", \"$dob\", NULL);");
 	}
+	
+	function userData($user_id)
+	{
+		$userData = "SELECT * FROM USERS WHERE user_id = \"$user_id\"";
+		
+		return $this->db->query($userData);
+	}
 
 	function addMedia($media_id, $user, $genre, $title, $type,
 			  $author, $publisher, $ISBN, $artist,

@@ -60,6 +60,25 @@ Class User_model extends Model
 		else
 			return false;
 	}
+	
+	function currentUser()
+	{
+		return $this->session->userdata('user_id');
+	}
+	
+	function userData($user_id)
+	{
+		$CI =& get_instance();
+		$CI->load->model('query');
+		$query = $CI->query->userData($user_id);
+		
+		foreach($query->result_array() as $user)
+			foreach($user as $attribute => $value)
+				$userData[$attribute] = $value;
+		
+		return $userData;
+	}
+	
 }
 
 ?>

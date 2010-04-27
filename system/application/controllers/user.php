@@ -20,7 +20,10 @@ class User extends Controller {
 			$this->load->view('welcome');
 		else
 		{
-			$this->load->view('home');
+			$data['user_id'] = $this->user_model->currentUser();
+			$data['userData'] = $this->user_model->userData($data['user_id']);
+			$data['title'] = "Hello, ".$data['userData']['fname'];
+			$this->load->view('home', $data);
 		}
 	}
 	
@@ -91,7 +94,7 @@ class User extends Controller {
 			else
 			{
 				$this->query->addNewUser($data['user_id'], $data['email'], $data['password'], $data['zip'], $data['fname'], $data['lname'], $data['day'], $data['month'], $data['year']);
-				echo 'awesome';
+				$this->load->view('signed_up', $data);
 			}
 		}
 	}

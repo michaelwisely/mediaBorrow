@@ -1,12 +1,6 @@
-<html>
-
-<head>
-	<title>Welcome, User</title>
-</head>
-
-<body>
-	<h1>You are logged in</h1>
-	<h3><?=anchor('logout', 'logout')?>
+<?=$this->load->view('header')?>
+<div id="container">
+	<h1>Hello, <?=$userData['fname']?></h1>
+</div>
 </body>
-
 </html>
