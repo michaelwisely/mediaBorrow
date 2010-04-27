@@ -11,8 +11,22 @@
 		<h2><a href="<?=base_url()?>">MediaBorrow</a></h2>
 		<span id="right">
 			<?=form_open('login')?>
-			<?=form_input('user_id', 'username')?>&nbsp;
-			<?=form_password('password', 'password')?>&nbsp;
+			<?php
+				$user_id_field = array(
+					'name' => 'user_id',
+					'value' => 'username',
+					'onfocus' => "if(this.value == 'username') this.value = '';",
+					'onblur' => "if(this.value == '') this.value = 'username'"
+				);
+				$password_field = array(
+					'name' => 'password',
+					'value' => 'password',
+					'onfocus' => "if(this.value == 'password') {this.value = ''; this.type='password'}",
+					'onblur' => "if(this.value == '') {this.type='type'; this.value = 'password';}"
+				);
+			?>
+			<?=form_input($user_id_field)?>&nbsp;
+			<?=form_input($password_field)?>&nbsp;
 			<input type="submit" value="Sign in" />
 			</form>
 		</span>

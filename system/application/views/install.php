@@ -112,8 +112,7 @@ for($i = 1900; $i <= date('Y'); $i++)
 			<td><?=form_input('zip');?></td>
 		</tr>
 		<tr>
-			<td><input type="submit" value="Sign up" />&nbsp;&nbsp;&nbsp;<a href="#" style="color:red">cancel</a></td>
-			<td></td>
+			<td><input type="submit" value="Sign up" /></td>
 		</tr>
 	</table>
 	</form>
