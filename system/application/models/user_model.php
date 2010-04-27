@@ -39,6 +39,27 @@ Class User_model extends Model
 		$this->session->set_userdata('logged_in', false);
 	}
 	
+	function user_exists($user_id)
+	{
+		$user_id = strtolower($user_id);
+		$users = $this->db->query("SELECT \"$user_id\" FROM USERS WHERE user_id = \"$user_id\"");
+		
+		if($users->num_rows() > 0)
+			return true;
+		else
+			return false;
+	}
+	
+	function email_exists($email)
+	{
+		$email = strtolower($email);
+		$users = $this->db->query("SELECT \"$email\" FROM USERS WHERE email = \"$email\"");
+		
+		if($users->num_rows() > 0)
+			return true;
+		else
+			return false;
+	}
 }
 
 ?>

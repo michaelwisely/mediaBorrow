@@ -22,14 +22,16 @@ class Install extends Controller {
 	function do_install()
 	{
 		if($_POST == NULL)
-			redirect('');
+		{
+			redirect('install');
+		}
 		else
 		{
 			//create all the tables in the database
 			$zips = 'CREATE TABLE ZIPS( zip char(5) NOT NULL, city varchar(30) NOT NULL, state varchar(20) NOT NULL, PRIMARY KEY (zip) )ENGINE = InnoDB;';
 			$this->db->query($zips);
 			
-			$users = 'CREATE TABLE USERS( user_id varchar(20) NOT NULL, email varchar(50) NOT NULL UNIQUE, password varchar(50) NOT NULL, zip char(5) NOT NULL, fname varchar(30) NOT NULL, lname varchar(30) NOT NULL, dob integer, area varchar(20), PRIMARY KEY (user_id), FOREIGN KEY (zip) REFERENCES ZIPS(zip) )ENGINE = InnoDB;';
+			$users = 'CREATE TABLE USERS( user_id varchar(20) NOT NULL, email varchar(50) NOT NULL UNIQUE, password varchar(50) NOT NULL, zip char(5) NOT NULL, fname varchar(30) NOT NULL, lname varchar(30) NOT NULL, dob varchar(10), area varchar(20), PRIMARY KEY (user_id), FOREIGN KEY (zip) REFERENCES ZIPS(zip) )ENGINE = InnoDB;';
 			$this->db->query($users);
 			
 			$suggestions = 'CREATE TABLE SUGGESTIONS( user_id varchar(20) NOT NULL, topic varchar(100) NOT NULL, time_stamp integer NOT NULL, suggestion text, PRIMARY KEY (user_id, time_stamp), FOREIGN KEY (user_id) REFERENCES USERS(user_id) )ENGINE = InnoDB;';

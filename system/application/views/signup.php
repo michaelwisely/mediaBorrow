@@ -1,5 +1,5 @@
 <?php
-$month = array(
+$months = array(
 			'01' => 'Jan',
 			'02' => 'Feb',
 			'03' => 'Mar',
@@ -16,12 +16,12 @@ $month = array(
 		
 for ($i = 0; $i < 31; $i++)
 {
-	$day[$i] = $i+1; 
+	$days[$i+1] = $i+1; 
 }
 
 for($i = 1900; $i <= date('Y'); $i++)
 {
-	$year[$i] = $i;
+	$years[$i] = $i;
 }
 
 ?>
@@ -32,6 +32,37 @@ for($i = 1900; $i <= date('Y'); $i++)
 	<title>Please Sign Up</title>
 	
 	<link href="<?=base_url().'css/main.css'?>" media="screen" rel="stylesheet" type="text/css" />
+	
+	<script type="text/javascript" src="<?=base_url().'js/jquery.js'?>"></script>
+	<script type="text/javascript" src="<?=base_url().'js/jquery.validate.js'?>"></script>
+	<script>
+		$(document).ready(function(){
+			$("#signup_form").validate({
+				rules: {
+					user_id: "required",
+					password: "required",
+					repeat_password: {
+						equalTo: "#password"
+					},
+					fname: "required",
+					lname: "required",
+					email: {
+						required: true,
+						email: true
+					},
+					zip: {
+						required: true,
+						minlength: 5,
+						maxlength: 5,
+						digits: true
+					}
+				},
+				messages: {
+					zip: "must be a 5 digit zip code"
+				}
+			});
+		});
+	</script>
 	
 </head>
 <body>
@@ -54,15 +85,15 @@ for($i = 1900; $i <= date('Y'); $i++)
 	
 	<h3 style="color:red"><?=$error?></h3>
 
-	<?=form_open('user/signup')?>
+	<?=form_open('signup', array('id' => 'signup_form'))?>
 	<table>
 		<tr>
 			<td>Username:</td>
-			<td><?=form_input('user_id')?></td>
+			<td><?=form_input(array('name' => 'user_id', 'value' => $user_id))?></td>
 		</tr>
 		<tr>
 			<td>Password:</td>
-			<td><?=form_input('genre');?></td>
+			<td><?=form_password(array('name' => 'password', 'id' => 'password'))?></td>
 		</tr>
 		<tr>
 			<td>Repeat Password:</td>
@@ -70,26 +101,26 @@ for($i = 1900; $i <= date('Y'); $i++)
 		</tr>
 		<tr>
 			<td>First Name:</td>
-			<td><?=form_input('fname')?></td>
+			<td><?=form_input(array('name' => 'fname', 'value' => $fname))?></td>
 		</tr>
 		<tr>
 			<td>Last Name:</td>
-			<td><?=form_input('lname')?></td>
+			<td><?=form_input(array('name' => 'lname', 'value' => $lname))?></td>
 		</tr>
 		<tr>
 			<td>Email Address:</td>
-			<td><?=form_input('email')?></td>
+			<td><?=form_input(array('name' => 'email', 'value' => $email))?></td>
 		</tr>
 		<tr>
 			<td>Date of Birth:</td>
-			<td><?=form_dropdown('month', $month)?> <?=form_dropdown('day', $day)?> <?=form_dropdown('year', $year)?></td>
+			<td><?=form_dropdown('month', $months, $month)?> <?=form_dropdown('day', $days, $day)?> <?=form_dropdown('year', $years, $year)?></td>
 		</tr>
 		<tr>
 			<td>Zip Code:</td>
-			<td><?=form_input('zip');?></td>
+			<td><?=form_input(array('name' => 'zip', 'value' => $zip))?></td>
 		</tr>
 		<tr>
-			<td><input type="submit" value="Sign up" />&nbsp;&nbsp;&nbsp;<a href="#" style="color:red">cancel</a></td>
+			<td><input type="submit" value="Sign up" />&nbsp;&nbsp;&nbsp;<a href="<?=base_url()?>" style="color:red">cancel</a></td>
 			<td></td>
 		</tr>
 	</table>

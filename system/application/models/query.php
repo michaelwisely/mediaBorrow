@@ -15,7 +15,9 @@ class Query extends Model
 			$this->db->simple_query("INSERT INTO ZIPS
 						VALUES($zip, 'nonsense', 'nonsense')");
 		
-		$dob = mktime(0, 0, 0, $month, $day, $year);
+		$user_id = strtolower($user_id);
+		$email = strtolower($email);
+		$dob = "$year-$month-$day";
 		
 		return $this->db->simple_query("INSERT INTO USERS
 					VALUES(\"$user_id\", \"$email\",
@@ -60,7 +62,7 @@ class Query extends Model
 					VALUES(\"$user_id1\", \"$user_id2\", true);");
 	}
 
-	function acceptFriendRequest($userid1, $user_id2)
+	function acceptFriendRequest($user_id1, $user_id2)
 	{
 		return $this->db->simple_query("UPDATE FRIENDS
 				SET pending = false
