@@ -17,7 +17,7 @@ class Media extends MY_controller {
 	function search()
 	{
 		if($_POST == NULL)
-			$_POST['search'] = 'Sherlock Holmes';
+			$_POST['search'] = NULL;
 		
 		$data['title'] = 'Search Results';
 		$data['results'] = $this->media_model->search($_POST['search']);

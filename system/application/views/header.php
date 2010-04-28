@@ -15,6 +15,18 @@
 		<h2><a href="<?=base_url()?>">MediaBorrow</a></h2>
 		<span id="right">
 			<?=anchor('logout', 'Logout')?>
+			&nbsp;&nbsp;&nbsp;
+			<?php
+				echo form_open('search/media', array('style'=>'display:inline;'));
+				$search_form = array(
+					'name' => 'search',
+					'value' => 'search media...',
+					'onfocus' => "if(this.value == 'search media...') this.value = '';",
+					'onblur' => "if(this.value == '') this.value = 'search media...'"
+				);
+				echo form_input($search_form);
+			?>
+			</form>
 		</span>
 	</div>
 </div>
