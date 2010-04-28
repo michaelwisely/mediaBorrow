@@ -23,6 +23,7 @@ class User extends Controller {
 			$data['user_id'] = $this->user_model->currentUser();
 			$data['userData'] = $this->user_model->userData($data['user_id']);
 			$data['title'] = "Hello, ".$data['userData']['fname'];
+			
 			$this->load->view('home', $data);
 		}
 	}

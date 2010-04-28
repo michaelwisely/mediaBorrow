@@ -6,7 +6,7 @@ class Media extends MY_controller {
 	{
 		parent::__construct();
 		
-		$this->load->helper('form');
+		
 	}
 	
 	function index()
@@ -21,6 +21,8 @@ class Media extends MY_controller {
 	
 	function add()
 	{
+		
+		
 		$this->load->view('media_add');
 	}
 }

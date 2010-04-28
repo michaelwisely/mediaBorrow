@@ -14,5 +14,7 @@ class MY_Controller extends Controller
 		//check if user is logged in
 		if(!$this->session->userdata('logged_in'))
 			redirect('');
+		
+		$this->load->user_model;
 	}
 }

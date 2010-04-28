@@ -1,3 +1,5 @@
+<html>
+
 <head>
 	<title>Signup Successful</title>
 	
