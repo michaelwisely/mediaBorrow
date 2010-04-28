@@ -80,23 +80,17 @@ Class User_model extends Query
 	function getLibraryInformation($user_id)
 	{
 		$query = $this->query->getUserLibrary($user_id);
+		$bookData = array();
+		$movieData = array();
+		$cdData = array();
 		
 		$books = $query['books'];
 		$cds = $query['cds'];
 		$movies = $query['movies'];
 		
-		foreach($books->result_array() as $book)
-			foreach($book as $attribute => $value)
-				$bookData[$attribute] = $value;
-		
-		foreach($cds->result_array() as $cd)
-			foreach($cd as $attribute => $value)
-				$cdData[$attribute] = $value;
-		
-		foreach($movies->result_array() as $movie)
-			foreach($movie as $attribute => $value)
-				$movieData[$attribute] = $value;
-		
+		$bookData = $books->result_array();
+		$cds = $cds->result_array();
+		$movieData = $movies->result_array();
 		return array("books"=>$bookData, "movies"=>$movieData, "cds"=>$cdData);
 	}
 	
@@ -104,6 +98,9 @@ Class User_model extends Query
 	{
 		$query = $this->query->getFriendRequests($user_id);
 		$query2 = $this->query->listFriends($user_id);
+		
+		$reqFriends = array();
+		$curFriends = array();
 		
 		foreach($query->result_array() as $user)
 			foreach($friend as $attribute => $value)

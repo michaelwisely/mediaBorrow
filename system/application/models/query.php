@@ -81,7 +81,7 @@ class Query extends Model
 	{
 		return $this->db->query("SELECT user_id2
 					FROM FRIENDS
-					WHERE pending = ‘true’
+					WHERE pending = \"true\"
 					  AND user_id1 = \"$user_id\";");
 	}
 
@@ -214,8 +214,8 @@ class Query extends Model
 
 	function getBorrowRequests($user_id)
 	{
-		return $this->db->query("SELECT borrow.media_id, borrows.user_id
-					FROM borrows
+		return $this->db->query("SELECT b.media_id, b.user_id
+					FROM BORROWS b
 					WHERE status = 'pending'
 					  AND borrows.user_id = \"$user_id\"; ");
 	}
@@ -249,13 +249,13 @@ class Query extends Model
 	{
 		return $this->db->query("SELECT user_id2
 					FROM FRIENDS
-					WHERE pending = ‘false’
+					WHERE pending = \"false\"
 					  AND user_id1 = \"$user_id\"
 					UNION
 					SELECT user_id1
 					FROM FRIENDS
-					WHERE pending = ‘false’
-					  AND uid2 = \"$user_id\";");
+					WHERE pending = \"false\"
+					  AND user_id2 = \"$user_id\";");
 	}
 
 	function bestRatedMedia()
@@ -303,15 +303,15 @@ class Query extends Model
 	{
 		$cds =  $this->db->query("SELECT *
 					FROM MEDIA
-					WHERE user_id = $user_id
+					WHERE user_id = \"$user_id\"
 					AND type = 'cd';");
 		$books = $this->db->query("SELECT *
 					  FROM MEDIA
-					  WHERE user_id
+					  WHERE user_id = \"$user_id\"
 					  AND type = 'book';");
 		$movies = $this->db->query("SELECT *
 					  FROM MEDIA
-					  WHERE user_id
+					  WHERE user_id = \"$user_id\"
 					  AND type = 'movie';");
 		return array("books"=>$books, "movies"=>$movies, "cds"=>$cds);
 	}

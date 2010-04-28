@@ -19,10 +19,25 @@ class User extends Controller {
 		if(!$this->session->userdata('logged_in'))
 			$this->load->view('welcome');
 		else
-		{
+		{			
 			$data['user_id'] = $this->user_model->currentUser();
 			$data['userData'] = $this->user_model->userData($data['user_id']);
 			$data['title'] = "Hello, ".$data['userData']['fname'];
+			
+			$user_id = $data['user_id'];
+			
+			$friendInfo = $this->user_model->getFriends($user_id);
+			$libInfo = $this->user_model->getLibraryInformation($user_id);
+			
+			//Each of these is an associative array in the form
+			//   ['title'=>'bleh', 'type'=>'bleh'........]
+			$data['books'] = $libInfo['books'];
+			$data['movies'] = $libInfo['movies'];
+			$data['cds'] = $libInfo['cds'];
+			
+			//This is an arsay with the form
+			//  ['kyle', 'jared', 'mike'.....]
+			$data['requests'] = $friendInfo['requests'];
 			
 			$this->load->view('home', $data);
 		}
@@ -98,10 +113,6 @@ class User extends Controller {
 				$this->load->view('signed_up', $data);
 			}
 		}
-	}
-	function profile()
-	{
-		
 	}
 }
 
