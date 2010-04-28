@@ -1,18 +1,15 @@
-<html>
-<head>
-	<title>Person's media</title>
-	<style>
-		table {border-collapse: collapse;}
-		tr {border-collapse: collapse;}
-		th {border-bottom: 2px solid black; font-weight: bold;}
-		td {border-bottom: 1px solid gray;}
-		td.outside{border-bottom: none;}
-		td, th {padding: 0 5px 0 20px; text-align: left;}
-	</style>
-</head>
+<?=$this->load->view('header')?>
+<div id="container">
+	<h1>Search Results</h1>
+	
+	<?php foreach($results as $media): ?>
+		<p>
+			<?php foreach($media as $attribute => $value): ?>
+			<?php if($value != '') {echo $attribute.' - '.$value.'<br />';} ?>
+			<?php endforeach; ?>
+		</p>
+	<?php endforeach; ?>
 
-<body>
-	<h1>Person's media library</h1>
 	
 	<table>
 	<tr >
@@ -43,5 +40,6 @@
 		<td class="outside"><a href="#">borrow</a></td>
 	</tr>
 	</table>
+</div>
 </body>
 </html>

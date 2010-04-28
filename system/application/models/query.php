@@ -220,9 +220,13 @@ class Query extends Model
 					  AND borrows.user_id = \"$user_id\"; ");
 	}
 
-	function searchForTitle($title)
+	function searchForTitle($title = NULL)
 	{
-		return $this->db->query("SELECT title, type
+		if($title == NULL)
+			return $this->db->query("SELECT *
+						FROM MEDIA;");
+		
+		return $this->db->query("SELECT *
 					FROM MEDIA
 					WHERE title = \"$title\";");
 	}
