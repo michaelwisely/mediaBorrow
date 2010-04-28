@@ -6,23 +6,28 @@ class Media extends MY_controller {
 	{
 		parent::__construct();
 		
-		
+		$this->load->model('media_model');
 	}
 	
 	function index()
 	{
-		$this->load->view('welcome');
+		redirect('');
 	}
 	
-	function show()
+	function search()
 	{
-		$this->load->view('media_list');
+		if($_POST == NULL)
+			$_POST['search'] = 'Sherlock Holmes';
+		
+		$data['title'] = 'Search Results';
+		$data['results'] = $this->media_model->search($_POST['search']);
+		$this->load->view('media_list', $data);
 	}
 	
 	function add()
 	{
-		
-		
 		$this->load->view('media_add');
+		
+		
 	}
 }
