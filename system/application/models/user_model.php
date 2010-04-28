@@ -1,6 +1,6 @@
 <?php
 
-Class User_model extends Model
+Class User_model extends Query
 {
 	function User_model()
 	{
@@ -68,9 +68,7 @@ Class User_model extends Model
 	
 	function userData($user_id)
 	{
-		$CI =& get_instance();
-		$CI->load->model('query');
-		$query = $CI->query->userData($user_id);
+		$query = $this->query->userData($user_id);
 		
 		foreach($query->result_array() as $user)
 			foreach($user as $attribute => $value)

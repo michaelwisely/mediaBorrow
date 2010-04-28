@@ -1,13 +1,10 @@
 <?php
 
-Class Media_model extends Model
+Class Media_model extends Query
 {
 	function Media_model()
 	{
 		parent::Model();
-		
-		$CI =& get_instance();
-		$CI->load->model('query');
 	}
 	
 	function search($search)
