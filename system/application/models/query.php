@@ -228,7 +228,7 @@ class Query extends Model
 		
 		return $this->db->query("SELECT *
 					FROM MEDIA
-					WHERE title = \"$title\";");
+					WHERE title LIKE \"%$title%\";");
 	}
 
 	function getPassword($user_id)
