@@ -79,6 +79,44 @@ Class User_model extends Model
 		return $userData;
 	}
 	
+	function getLibraryInformation($user_id)
+	{
+		$query = $this->query->getUserLibrary($user_id);
+		
+		$books = $query['books'];
+		$cds = $query['cds'];
+		$movies = $query['movies'];
+		
+		foreach($books->result_array() as $book)
+			foreach($book as $attribute => $value)
+				$bookData[$attribute] = $value;
+		
+		foreach($cds->result_array() as $cd)
+			foreach($cd as $attribute => $value)
+				$cdData[$attribute] = $value;
+		
+		foreach($movies->result_array() as $movie)
+			foreach($movie as $attribute => $value)
+				$movieData[$attribute] = $value;
+		
+		return array("books"=>$bookData, "movies"=>$movieData, "cds"=>$cdData);
+	}
+	
+	function getFriends($user_id)
+	{
+		$query = $this->query->getFriendRequests($user_id);
+		$query2 = $this->query->listFriends($user_id);
+		
+		foreach($query->result_array() as $user)
+			foreach($friend as $attribute => $value)
+				array_push($reqFriends, $value);
+				
+		foreach($query2->result_array() as $user)
+			foreach($friend as $attribute => $value)
+				array_push($curFriends, $value);
+		
+		return array("requests"=>$reqFriends, "friends"=>$curFriends);
+	}
 }
 
 ?>

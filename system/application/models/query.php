@@ -82,12 +82,7 @@ class Query extends Model
 		return $this->db->query("SELECT user_id2
 					FROM FRIENDS
 					WHERE pending = ‘true’
-					  AND user_id1 = \"$user_id\"
-					UNION
-					SELECT user_id1
-					FROM FRIENDS
-					WHERE pending = ‘true’
-					  AND user_id2 = \"$user_id\" ;");
+					  AND user_id1 = \"$user_id\";");
 	}
 
 	function addcomment($user_id, $media_id, $comment_text, $rating)
@@ -266,21 +261,21 @@ class Query extends Model
 					WHERE type = 'book' 
 					  AND m.media_id = c.media_id
 					  AND rating = ( SELECT MAX(rating)
-							 FROM comments );");
+							 FROM COMMENTS );");
 
 		$cds = $this ->db->query("SELECT title, artist
 					FROM MEDIA m, COMMENTS c
 					WHERE type = 'CD' 
 					  AND m.media_id = c.media_id
 					  AND rating = ( SELECT MAX(rating)
-							 FROM comments );");
+							 FROM COMMENTS );");
 
 		$movies = $this->db->query("SELECT title, writer, director
 					FROM MEDIA m, COMMENTS c
 					WHERE type = 'movie' 
 					  AND m.media_id = c.media_id
 					  AND rating = ( SELECT MAX(rating)
-							FROM comments );");
+							FROM COMMENTS );");
 		return array("books"=>$books, "cds"=>$cds, "movies"=>$movies);
 	}
 
@@ -288,16 +283,32 @@ class Query extends Model
 	function getAverageRating($media_id)
 	{
 		return $this->db->query("SELECT AVG(rating)
-					FROM Comments
+					FROM COMMENTS
 					WHERE media_id = $media_id;");
 	}
 
 	function getPastBorrows($user_id)
 	{
 		return $this->db->query("SELECT start_date, return_date, title
-					FROM borrows, media
-					WHERE borrows.media_id = media.media_id 
+					FROM BORROWS b, MEDIA m
+					WHERE b.media_id = m.media_id 
 					  AND status = 'returned' 
-					  AND user_id = \"$user_id\";");
+					  AND b.user_id = \"$user_id\";");
+	}
+	function getUserLibrary($user_id)
+	{
+		$cds =  $this->db->query("SELECT *
+					FROM MEDIA
+					WHERE user_id = $user_id
+					AND type = 'cd';");
+		$books = $this->db->query("SELECT *
+					  FROM MEDIA
+					  WHERE user_id
+					  AND type = 'book';");
+		$movies = $this->db->query("SELECT *
+					  FROM MEDIA
+					  WHERE user_id
+					  AND type = 'movie';");
+		return array("books"=>$books, "movies"=>$movies, "cds"=>$cds);
 	}
 }
