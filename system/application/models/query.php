@@ -12,8 +12,14 @@ class Query extends Model
 		$zips = "SELECT zip FROM ZIPS WHERE zip = $zip";
 		$zips = $this->db->query($zips);
 		if($zips->num_rows() == 0)
+		{
+			$CI =& get_instance();
+			$CI->load->helper('location');
+			$cityState = zipCodeLookup($zip);
+			
 			$this->db->simple_query("INSERT INTO ZIPS
-						VALUES($zip, 'nonsense', 'nonsense')");
+						VALUES($zip, '".$cityState['city']."', '".$cityState['state']."')");
+		}
 		
 		$user_id = strtolower($user_id);
 		$email = strtolower($email);
