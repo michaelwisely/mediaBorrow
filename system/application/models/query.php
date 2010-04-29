@@ -37,6 +37,13 @@ class Query extends Model
 		
 		return $this->db->query($userData);
 	}
+	
+	function mediaData($media_id)
+	{
+		return $this->db->query("SELECT *
+					FROM USERS
+					WHERE media_id = \"$media_id\";");
+	}
 
 	function addMedia($user_id, $genre, $title, $type,
 			  $author, $publisher, $ISBN, $artist,

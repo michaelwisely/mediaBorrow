@@ -21,10 +21,15 @@ Class Media_model extends Query
 	{
 		$query = $this->query->searchForTitle($search);
 		
-		
-		
 		return $query->result_array();
 	}
+	
+	function mediaData($media_id)
+	{
+		$query = $this->query->mediaData($media_id);
+		return $query->result_array();
+	}
+	
 }
 
 ?>
