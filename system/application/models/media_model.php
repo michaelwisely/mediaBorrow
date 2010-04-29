@@ -34,7 +34,12 @@ Class Media_model extends Query
 					   $attr['ISBN'], $attr['artist'], $attr['writer'],
 			      		   $attr['director']);
 	}
-		
+	
+	function delete($media_id)
+	{
+		$this->query->deleteItem($media_id);
+	}
+	
 	function mediaData($media_id)
 	{
 		$query = $this->query->mediaData($media_id);

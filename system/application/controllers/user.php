@@ -39,6 +39,13 @@ class User extends Controller {
 			else
 			{
 				$data['title'] = $data['userData']['fname']." ".$data['userData']['lname']."'s Profile";
+				$libInfo = $this->user_model->getLibraryInformation($data['user_id']);
+			
+				//Each of these is an associative array in the form
+				//   ['title'=>'bleh', 'type'=>'bleh'........]
+				$data['books'] = $libInfo['books'];
+				$data['movies'] = $libInfo['movies'];
+				$data['cds'] = $libInfo['cds'];
 			}
 	
 			$this->load->view('profile', $data);

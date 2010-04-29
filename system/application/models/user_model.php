@@ -82,10 +82,7 @@ class User_model extends Query
 	function getLibraryInformation($user_id)
 	{
 		$query = $this->query->getUserLibrary($user_id);
-		$bookData = array();
-		$movieData = array();
-		$cdData = array();
-		
+
 		$books = $query['books'];
 		$cds = $query['cds'];
 		$movies = $query['movies'];

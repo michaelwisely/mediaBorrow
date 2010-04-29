@@ -62,6 +62,9 @@ class Media extends MY_controller {
 	
 	function delete()
 	{
-		
+		if()
+		$media_id = $this->uri->segment(3);
+		$data['media'] = $this->media_model->mediaData($media_id);
+		$this->load->view('are_you_sure', $data);
 	}
 }
