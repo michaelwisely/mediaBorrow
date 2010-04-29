@@ -38,33 +38,29 @@ class Query extends Model
 		return $this->db->query($userData);
 	}
 
-	function addMedia($media_id, $user, $genre, $title, $type,
+	function addMedia($user_id, $genre, $title, $type,
 			  $author, $publisher, $ISBN, $artist,
 			  $writer, $director)
 	{
 		if($type == "book")
 		{
-			$temp = $this->db->simple_query("INSERT INTO MEDIA 
-					VALUES($media_id, \"$user\",
+			$temp = $this->db->simple_query("INSERT INTO MEDIA (`user_id`, `genre`, `title`, `type`, `author`, `publisher`, `ISBN`)
+					VALUES(\"$user_id\",
 						\"$genre\", \"$title\",
 						\"$type\", \"$author\",
-						\"$publisher\", \"$ISBN\",
-						NULL, NULL, NULL);");
+						\"$publisher\", \"$ISBN\");");
 		}
 		else if($type == "cd")
 		{
-			$temp = $this->db->simple_query("INSERT INTO MEDIA 
-					VALUES($media_id, \"$user_id\",
-						\"$genre\", \"$title\", \"$type\",
-						NULL, NULL, NULL, \"$artist\", 
-						NULL, NULL);");
+			$temp = $this->db->simple_query("INSERT INTO MEDIA (`user_id`, `genre`, `title`, `type`, `artist`)
+					VALUES(\"$user_id\",
+						\"$genre\", \"$title\", \"$type\", \"$artist\");");
 		}
 		else if($type == "movie")
 		{
-			$temp = $this->db->simple_query("INSERT INTO MEDIA 
-				VALUES($media_id, \"$user_id\", \"$genre\",
-					\"$title\", \"$type\", NULL, NULL,
-					NULL, NULL, \"$writer\", \"$director\");");
+			$temp = $this->db->simple_query("INSERT INTO MEDIA (`user_id`, `genre`, `title`, `type`, `writer`, `director`)
+				VALUES(\"$user_id\", \"$genre\",
+					\"$title\", \"$type\", \"$writer\", \"$director\");");
 		}
 		return $temp;
 	}

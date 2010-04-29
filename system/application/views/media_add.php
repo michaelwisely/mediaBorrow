@@ -1,18 +1,25 @@
-<html>
-<head>
-	<title>Add Media</title>
-	<style>
-		table {border-collapse: collapse;}
-		tr {border-collapse: collapse;}
-		td.outside{border-bottom: none;}
-		td, th {padding: 0 5px 0 20px; text-align: left;}
-	</style>
-</head>
+<?=$this->load->view('header')?>
+<script>
+	function typeChange()
+	{
+		//alert($("#mediaType").val());
+		$(".type").hide();
+		$("."+$("#mediaType").val()).show();
+	}
+	$(document).ready(function(){
+		$("#add_form").validate({
+			rules: {
+				title: "required",
+				genre: "required"
+			}
+		});
+	});
+</script>
 
-<body>
-	<h1>Add Media</h1>
+<div id="container">
+	<h1>Add new media</h1>
 	
-	<?=form_open('media/add')?>
+	<?=form_open('add/media', array('id' => 'add_form'))?>
 	<table>
 	<tr>
 		<td>Title:</td>
@@ -28,55 +35,44 @@
 			<?php
 			$types = array(
 				'book' => 'Book',
-				'cd' => 'CD',
 				'movie' => 'Movie',
+				'cd' => 'CD'
 				);
 			?>
-			<?=form_dropdown('month', $types)?>
+			<?=form_dropdown('type', $types, 'book', 'id="mediaType" onChange="typeChange();"')?>
 		</td>
 	</tr>
-	<tr>
-		<td></td>
-		<td><b>For Books</b></td>
-	</tr>
-	<tr>
+	<tr class="book type">
 		<td>Author:</td>
 		<td><?=form_input('author');?></td>
 	</tr>
-	<tr>
+	<tr class="book type">
 		<td>Publisher:</td>
 		<td><?=form_input('publisher');?></td>
 	</tr>
-	<tr>
+	<tr class="book type">
 		<td>ISBN:</td>
-		<td><?=form_input('isbn');?></td>
+		<td><?=form_input('ISBN');?></td>
 	</tr>
-	<tr>
-		<td></td>
-		<td><b>For Movies</b></td>
-	</tr>
-	<tr>
+	<tr class="movie type" style="display: none;">
 		<td>Writer:</td>
 		<td><?=form_input('writer');?></td>
 	</tr>
-	<tr>
+	<tr class="movie type" style="display: none;">
 		<td>Director:</td>
 		<td><?=form_input('director');?></td>
 	</tr>
-	<tr>
-		<td></td>
-		<td><b>For CDs</b></td>
-	</tr>
-	<tr>
+	<tr class="cd type" style="display: none;">
 		<td>Artist:</td>
 		<td><?=form_input('artist');?></td>
 	</tr>
 	<tr>
 		<td><input type="submit" value="Add" /></td>
-		<td><a href="#" style="color:red">cancel</a></td>
+		<td><a href="<?=base_url()?>" style="color:red">cancel</a></td>
 	</tr>
 	</table>
 	
 	</form>
+</div>
 </body>
 </html>

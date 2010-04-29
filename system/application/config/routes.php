@@ -49,7 +49,7 @@ $route['login'] = 'user/login';
 $route['logout'] = 'user/logout';
 
 //delete these later! this is only for phase 2
-$route['person/media/all'] = 'media/show';
+$route['add/media'] = 'media/add';
 $route['search/media'] = 'media/search';
 
 
