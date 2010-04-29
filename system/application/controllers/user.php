@@ -16,16 +16,27 @@ class User extends Controller {
 	
 	function profile()
 	{
-		if ($this->uri->segment(1))
+		if ($this->uri->segment(3))
 		{
-			$data['user_id']=$this->uri->segment(1);
+			$data['user_id']=$this->uri->segment(3);
 		}
 		else
 		{
 			$data['user_id'] = $this->user_model->currentUser();	
 		}
+		
 		$data['userData'] = $this->user_model->userData($data['user_id']);
-		$data['title'] = $data['user_id']." ".$data['user_id']."'s Profile";
+		
+		if (empty($data['userData']))
+		{
+			$data['userData']['fname'] = "John Doe";
+			$data['title'] = "No such person";
+		}
+		else
+		{
+			$data['title'] = $data['userData']['fname']." ".$data['userData']['lname']."'s Profile";
+		}
+
 		$this->load->view('profile', $data);
 	}
 	
