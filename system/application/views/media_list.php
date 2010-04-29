@@ -30,6 +30,7 @@
 		<p><?=$book['genre']?></p>
 		<p><?php if($book['publisher'] != '') echo "Published by ".$book['publisher']; ?></p>
 		<p><?php if($book['ISBN'] != '') echo "ISBN: ".$book['ISBN']; ?></p>
+		<p><?php if($book['rating'] != '') echo "Rating: ".$book['rating']; ?></p>
 		<br /><br />
 	<?php endforeach;?>
 </div>
@@ -46,6 +47,7 @@
 		<p><?php if($movie['writer'] != '') echo "Written by ".$movie['writer']; ?></p>
 		<p><?php if($movie['director'] != '') echo "Directed by ".$movie['director']; ?></p>
 		<p><?=$movie['genre']?></p>
+		<p><?php if($movie['rating'] != '') echo "Rating: ".$movie['rating']; ?></p>
 		<br /><br />
 	<?php endforeach;?>
 </div>
@@ -61,6 +63,7 @@
 		</p>
 		<p><?php if($cd['artist'] != '') echo "By ".$cd['artist']; ?></p>
 		<p><?=$cd['genre']?></p>
+		<p><?php if($cd['rating'] != '') echo "Rating: ".$cd['rating']; ?></p>
 		<br /><br />
 	<?php endforeach;?>
 </div>

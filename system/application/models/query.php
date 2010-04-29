@@ -308,9 +308,12 @@ class Query extends Model
  
 	function getAverageRating($media_id)
 	{
-		return $this->db->query("SELECT AVG(rating)
+		$query = $this->db->query("SELECT AVG(rating)
 					FROM COMMENTS
 					WHERE media_id = $media_id;");
+		foreach($query->result_array() as $array)
+			$result = $array['AVG(rating)'];
+		return substr($result, 0, 3);
 	}
 
 	function getPastBorrows($user_id)

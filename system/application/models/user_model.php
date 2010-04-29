@@ -93,7 +93,41 @@ class User_model extends Query
 		$bookData = $books->result_array();
 		$cdData = $cds->result_array();
 		$movieData = $movies->result_array();
-		return array("books"=>$bookData, "movies"=>$movieData, "cds"=>$cdData);
+		
+		$books = array();
+		$movies = array();
+		$cds = array();
+		
+		//instert ratings
+		foreach($bookData as $book)
+		{
+			foreach($book as $attr => $value)
+			{
+				$temp[$attr] = $value;
+			}
+			$temp['rating'] = $this->query->getAverageRating($temp['media_id']);
+			array_push($books, $temp);
+		}
+		foreach($movieData as $movie)
+		{
+			foreach($movie as $attr => $value)
+			{
+				$temp[$attr] = $value;
+			}
+			$temp['rating'] = $this->query->getAverageRating($temp['media_id']);
+			array_push($movies, $temp);
+		}
+		foreach($cdData as $cd)
+		{
+			foreach($cd as $attr => $value)
+			{
+				$temp[$attr] = $value;
+			}
+			$temp['rating'] = $this->query->getAverageRating($temp['media_id']);
+			array_push($cds, $temp);
+		}
+		
+		return array("books"=>$books, "movies"=>$movies, "cds"=>$cds);
 	}
 }
 

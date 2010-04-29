@@ -33,6 +33,8 @@ class Media extends MY_controller {
 		
 		foreach($results as $media)
 		{
+			$media['rating'] = $this->query->getAverageRating($media['media_id']);
+			
 			if($media['user_id'] == $currentUser)
 				$media['thisUser'] = true;
 			else
