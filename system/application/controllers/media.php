@@ -40,4 +40,23 @@ class Media extends MY_controller {
 			$this->load->view('confirmation', $data);
 		}
 	}
+	
+	function edit()
+	{
+		if($_POST == NULL)
+		{
+			$media_id = $this->uri->segment(3);
+			$data['title'] = 'Edit Media';
+			$data['media'] = $this->media_model->mediaData($media_id);
+			$this->load->view('media_edit', $data);
+		}
+		else
+		{
+			$this->media_model->modify_media($_POST);
+			
+			$data['title'] = $_POST['title'].' Successfully Edited';
+			$data['message'] = $_POST['title'].' has been changed in your library';
+			$this->load->view('confirmation', $data);
+		}
+	}
 }
