@@ -41,7 +41,7 @@ class Query extends Model
 	function mediaData($media_id)
 	{
 		return $this->db->query("SELECT *
-					FROM USERS
+					FROM MEDIA
 					WHERE media_id = $media_id;");
 	}
 
