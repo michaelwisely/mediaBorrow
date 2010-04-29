@@ -26,7 +26,10 @@ class User extends Controller {
 			}
 			else
 			{
-				$data['user_id'] = $this->user_model->currentUser();	
+				if($this->uri->segment(2) != 'profile')
+					$data['user_id'] = $this->uri->segment(2);
+				if($this->uri->segment(2) == '')
+					$data['user_id'] = $this->user_model->currentUser();
 			}
 			
 			$data['userData'] = $this->user_model->userData($data['user_id']);

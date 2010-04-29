@@ -52,6 +52,7 @@ $route['logout'] = 'user/logout';
 $route['add/media'] = 'media/add';
 $route['search/media'] = 'media/search';
 $route['account/edit'] = 'user/edit';
+$route['profile/(:any)'] = 'user/profile/$1';
 $route['profile'] = 'user/profile';
 
 
