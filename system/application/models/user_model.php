@@ -91,7 +91,7 @@ class User_model extends Query
 		$movies = $query['movies'];
 		
 		$bookData = $books->result_array();
-		$cdDatas = $cds->result_array();
+		$cdData = $cds->result_array();
 		$movieData = $movies->result_array();
 		return array("books"=>$bookData, "movies"=>$movieData, "cds"=>$cdData);
 	}
