@@ -330,19 +330,19 @@ class Query extends Model
 
 	}
 	
-	function modify_media($media_id, $user_id, $genre, $title
+	function modify_media($media_id, $user_id, $genre, $title,
 			      $author, $publisher, $ISBN, $artist, $writer,
 			      $director)
 			      
 	{			
-		"UPDATE MEDIA
-		SET genre = $genre, title = $title, author = $author
-		publish = $publisher, ISBN = $ISBN, artist = $artist,
-		writer = $writer, director = $director
-		WHERE MEDIA.media_id = $media_id and MEDIA.user_id = $user_id"
+		return $this->db->query("UPDATE MEDIA
+			SET genre = $genre, title = $title, author = $author
+			publish = $publisher, ISBN = $ISBN, artist = $artist,
+			writer = $writer, director = $director
+			WHERE MEDIA.media_id = $media_id and MEDIA.user_id = $user_id");
 	}
 
-
+}
 
 
 

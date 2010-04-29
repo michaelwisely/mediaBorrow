@@ -59,4 +59,9 @@ class Media extends MY_controller {
 			$this->load->view('confirmation', $data);
 		}
 	}
+	
+	function delete()
+	{
+		
+	}
 }
