@@ -1,10 +1,10 @@
 <?php
 
-Class User_model extends Query
+class User_model extends Query
 {
 	function User_model()
 	{
-		parent::Model();
+		parent::Query();
 	}
 	
 	function login($user_id, $password)
@@ -70,6 +70,8 @@ Class User_model extends Query
 	{
 		$query = $this->query->userData($user_id);
 		
+		$userData = array();
+		
 		foreach($query->result_array() as $user)
 			foreach($user as $attribute => $value)
 				$userData[$attribute] = $value;
@@ -92,25 +94,6 @@ Class User_model extends Query
 		$cds = $cds->result_array();
 		$movieData = $movies->result_array();
 		return array("books"=>$bookData, "movies"=>$movieData, "cds"=>$cdData);
-	}
-	
-	function getFriends($user_id)
-	{
-		$query = $this->query->getFriendRequests($user_id);
-		$query2 = $this->query->listFriends($user_id);
-		
-		$reqFriends = array();
-		$curFriends = array();
-		
-		foreach($query->result_array() as $user)
-			foreach($friend as $attribute => $value)
-				array_push($reqFriends, $value);
-				
-		foreach($query2->result_array() as $user)
-			foreach($friend as $attribute => $value)
-				array_push($curFriends, $value);
-		
-		return array("requests"=>$reqFriends, "friends"=>$curFriends);
 	}
 }
 

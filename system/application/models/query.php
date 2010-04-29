@@ -81,10 +81,10 @@ class Query extends Model
 
 	function getFriendRequests($user_id)
 	{
-		return $this->db->query("SELECT user_id2
+		return $this->db->query("SELECT user_id1
 					FROM FRIENDS
 					WHERE pending = \"true\"
-					  AND user_id1 = \"$user_id\";");
+					  AND user_id2 = \"$user_id\";");
 	}
 
 	function addcomment($user_id, $media_id, $comment_text, $rating)
@@ -161,6 +161,10 @@ class Query extends Model
 	
 	function updateUserProfile($email, $password, $zip, $fname, $lname, $dob, $area)
 	{
+		if ($area != "NULL")
+		{
+			$area = "\"$area\"";
+		}
 		return $this->db->simple_query("UPDATE USERS
 					SET email = \"$email\",
 					    password =\"$password\",
@@ -168,7 +172,7 @@ class Query extends Model
 					    fname = \"$fname\",
 					    lname = \"$lname\",
 					    dob = \"$dob\",
-					    area = \"$area\"
+					    area = $area
 					WHERE user_id = \"$user_id\";");
 	} 
  
