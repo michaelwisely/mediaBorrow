@@ -75,6 +75,9 @@ class User_model extends Query
 		foreach($query->result_array() as $user)
 			foreach($user as $attribute => $value)
 				$userData[$attribute] = $value;
+        $cityState = $this->getCityStateForZip($userData['zip']);
+		$userData['city'] = $cityState['city'];
+		$userData['state'] = $cityState['state'];
 		
 		return $userData;
 	}

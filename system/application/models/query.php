@@ -104,6 +104,15 @@ class Query extends Model
 						VALUES(\"$user_id\", $media_id,
 							\"$comment_text\", $rating, \"$time\");");
 	}
+	
+	function getCityStateForZip($zip)
+	{
+	   $cityState = $this->db->query("SELECT city, state
+	                                   FROM ZIPS
+	                                   WHERE zip = \"$zip\";");
+	   $array = $cityState->result_array();
+	   return $array[0];
+	}
 
 	function requestBorrow($borrower_id, $media_id)
 	{
