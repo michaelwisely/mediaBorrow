@@ -4,7 +4,7 @@ Class Media_model extends Query
 {
 	function Media_model()
 	{
-		parent::Model();
+		parent::Query();
 	}
 	
 	function add($attr)
