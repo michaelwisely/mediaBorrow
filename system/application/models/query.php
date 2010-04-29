@@ -327,5 +327,22 @@ class Query extends Model
 					  WHERE user_id = \"$user_id\"
 					  AND type = 'movie';");
 		return array("books"=>$books, "movies"=>$movies, "cds"=>$cds);
+
 	}
-}
+	
+	function modify_media($media_id, $user_id, $genre, $title
+			      $author, $publisher, $ISBN, $artist, $writer,
+			      $director)
+			      
+	{			
+		"UPDATE MEDIA
+		SET genre = $genre, title = $title, author = $author
+		publish = $publisher, ISBN = $ISBN, artist = $artist,
+		writer = $writer, director = $director
+		WHERE MEDIA.media_id = $media_id and MEDIA.user_id = $user_id"
+	}
+
+
+
+
+
