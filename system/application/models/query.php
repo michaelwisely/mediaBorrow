@@ -165,6 +165,10 @@ class Query extends Model
 	
 	function updateUserProfile($email, $password, $zip, $fname, $lname, $dob, $area)
 	{
+		if ($area != "NULL")
+		{
+			$area = "\"$area\"";
+		}
 		return $this->db->simple_query("UPDATE USERS
 					SET email = \"$email\",
 					    password =\"$password\",
@@ -172,7 +176,7 @@ class Query extends Model
 					    fname = \"$fname\",
 					    lname = \"$lname\",
 					    dob = \"$dob\",
-					    area = \"$area\"
+					    area = $area
 					WHERE user_id = \"$user_id\";");
 	} 
  

@@ -16,39 +16,33 @@ class User extends Controller {
 	
 	function profile()
 	{
-		if ($this->uri->segment(3))
-		{
-			$data['user_id']=$this->uri->segment(3);
-		}
+		if(!$this->session->userdata('logged_in'))
+			redirect('');
 		else
 		{
-			$data['user_id'] = $this->user_model->currentUser();	
-		}
-		
-		$data['userData'] = $this->user_model->userData($data['user_id']);
-		
-		if (empty($data['userData']))
-		{
-			$data['userData']['fname'] = "John Doe";
-			$data['title'] = "No such person";
-		}
-		else
-		{
-			$data['title'] = $data['userData']['fname']." ".$data['userData']['lname']."'s Profile";
-		}
-
-		$this->load->view('profile', $data);
-	}
+			if ($this->uri->segment(3))
+			{
+				$data['user_id']=$this->uri->segment(3);
+			}
+			else
+			{
+				$data['user_id'] = $this->user_model->currentUser();	
+			}
+			
+			$data['userData'] = $this->user_model->userData($data['user_id']);
+			
+			if (empty($data['userData']))
+			{
+				$data['userData']['fname'] = "John Doe";
+				$data['title'] = "No such person";
+			}
+			else
+			{
+				$data['title'] = $data['userData']['fname']." ".$data['userData']['lname']."'s Profile";
+			}
 	
-	function friends()
-	{
-		$user_id = $this->user_model->currentUser();
-		$userInfo = $this->user_model->userData($user_id);
-		$friendArray = $this->user_model->getFriends($user_id);
-		$data['friends'] = $friendArray['friends'];
-		$data['requests'] = $friendArray['requests'];
-		$data['title'] = $userInfo['fname'];
-		$this->load->view('friends', $data);
+			$this->load->view('profile', $data);
+		}
 	}
 	
 	function index()
@@ -56,14 +50,16 @@ class User extends Controller {
 		if(!$this->session->userdata('logged_in'))
 			$this->load->view('welcome');
 		else
-		{			
+		{
+			$this->load->model('friend_model');
+			
 			$data['user_id'] = $this->user_model->currentUser();
 			$data['userData'] = $this->user_model->userData($data['user_id']);
 			$data['title'] = "Hello, ".$data['userData']['fname'];
 			
 			$user_id = $data['user_id'];
-			
-			$friendInfo = $this->user_model->getFriends($user_id);
+						
+			$friendInfo = $this->friend_model->getFriends($user_id);
 			$libInfo = $this->user_model->getLibraryInformation($user_id);
 			
 			//Each of these is an associative array in the form
