@@ -12,8 +12,14 @@ class Query extends Model
 		$zips = "SELECT zip FROM ZIPS WHERE zip = $zip";
 		$zips = $this->db->query($zips);
 		if($zips->num_rows() == 0)
+		{
+			$CI =& get_instance();
+			$CI->load->helper('location');
+			$cityState = zipCodeLookup($zip);
+			
 			$this->db->simple_query("INSERT INTO ZIPS
-						VALUES($zip, 'nonsense', 'nonsense')");
+						VALUES($zip, '".$cityState['city']."', '".$cityState['state']."')");
+		}
 		
 		$user_id = strtolower($user_id);
 		$email = strtolower($email);
@@ -32,33 +38,29 @@ class Query extends Model
 		return $this->db->query($userData);
 	}
 
-	function addMedia($media_id, $user, $genre, $title, $type,
+	function addMedia($user_id, $genre, $title, $type,
 			  $author, $publisher, $ISBN, $artist,
 			  $writer, $director)
 	{
 		if($type == "book")
 		{
-			$temp = $this->db->simple_query("INSERT INTO MEDIA 
-					VALUES($media_id, \"$user\",
+			$temp = $this->db->simple_query("INSERT INTO MEDIA (`user_id`, `genre`, `title`, `type`, `author`, `publisher`, `ISBN`)
+					VALUES(\"$user_id\",
 						\"$genre\", \"$title\",
 						\"$type\", \"$author\",
-						\"$publisher\", \"$ISBN\",
-						NULL, NULL, NULL);");
+						\"$publisher\", \"$ISBN\");");
 		}
 		else if($type == "cd")
 		{
-			$temp = $this->db->simple_query("INSERT INTO MEDIA 
-					VALUES($media_id, \"$user_id\",
-						\"$genre\", \"$title\", \"$type\",
-						NULL, NULL, NULL, \"$artist\", 
-						NULL, NULL);");
+			$temp = $this->db->simple_query("INSERT INTO MEDIA (`user_id`, `genre`, `title`, `type`, `artist`)
+					VALUES(\"$user_id\",
+						\"$genre\", \"$title\", \"$type\", \"$artist\");");
 		}
 		else if($type == "movie")
 		{
-			$temp = $this->db->simple_query("INSERT INTO MEDIA 
-				VALUES($media_id, \"$user_id\", \"$genre\",
-					\"$title\", \"$type\", NULL, NULL,
-					NULL, NULL, \"$writer\", \"$director\");");
+			$temp = $this->db->simple_query("INSERT INTO MEDIA (`user_id`, `genre`, `title`, `type`, `writer`, `director`)
+				VALUES(\"$user_id\", \"$genre\",
+					\"$title\", \"$type\", \"$writer\", \"$director\");");
 		}
 		return $temp;
 	}
@@ -79,10 +81,10 @@ class Query extends Model
 
 	function getFriendRequests($user_id)
 	{
-		return $this->db->query("SELECT user_id2
+		return $this->db->query("SELECT user_id1
 					FROM FRIENDS
-					WHERE pending = ‘true’
-					  AND user_id1 = \"$user_id\";");
+					WHERE pending = \"true\"
+					  AND user_id2 = \"$user_id\";");
 	}
 
 	function addcomment($user_id, $media_id, $comment_text, $rating)
@@ -159,6 +161,10 @@ class Query extends Model
 	
 	function updateUserProfile($email, $password, $zip, $fname, $lname, $dob, $area)
 	{
+		if ($area != "NULL")
+		{
+			$area = "\"$area\"";
+		}
 		return $this->db->simple_query("UPDATE USERS
 					SET email = \"$email\",
 					    password =\"$password\",
@@ -166,7 +172,7 @@ class Query extends Model
 					    fname = \"$fname\",
 					    lname = \"$lname\",
 					    dob = \"$dob\",
-					    area = \"$area\"
+					    area = $area
 					WHERE user_id = \"$user_id\";");
 	} 
  
@@ -214,8 +220,8 @@ class Query extends Model
 
 	function getBorrowRequests($user_id)
 	{
-		return $this->db->query("SELECT borrow.media_id, borrows.user_id
-					FROM borrows
+		return $this->db->query("SELECT b.media_id, b.user_id
+					FROM BORROWS b
 					WHERE status = 'pending'
 					  AND borrows.user_id = \"$user_id\"; ");
 	}
@@ -228,7 +234,7 @@ class Query extends Model
 		
 		return $this->db->query("SELECT *
 					FROM MEDIA
-					WHERE title = \"$title\";");
+					WHERE title LIKE \"%$title%\";");
 	}
 
 	function getPassword($user_id)
@@ -249,13 +255,13 @@ class Query extends Model
 	{
 		return $this->db->query("SELECT user_id2
 					FROM FRIENDS
-					WHERE pending = ‘false’
+					WHERE pending = \"false\"
 					  AND user_id1 = \"$user_id\"
 					UNION
 					SELECT user_id1
 					FROM FRIENDS
-					WHERE pending = ‘false’
-					  AND uid2 = \"$user_id\";");
+					WHERE pending = \"false\"
+					  AND user_id2 = \"$user_id\";");
 	}
 
 	function bestRatedMedia()
@@ -303,15 +309,15 @@ class Query extends Model
 	{
 		$cds =  $this->db->query("SELECT *
 					FROM MEDIA
-					WHERE user_id = $user_id
+					WHERE user_id = \"$user_id\"
 					AND type = 'cd';");
 		$books = $this->db->query("SELECT *
 					  FROM MEDIA
-					  WHERE user_id
+					  WHERE user_id = \"$user_id\"
 					  AND type = 'book';");
 		$movies = $this->db->query("SELECT *
 					  FROM MEDIA
-					  WHERE user_id
+					  WHERE user_id = \"$user_id\"
 					  AND type = 'movie';");
 		return array("books"=>$books, "movies"=>$movies, "cds"=>$cds);
 	}
