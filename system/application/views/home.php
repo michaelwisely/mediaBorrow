@@ -42,7 +42,7 @@
 		</div>
 		<div id="Movies" class="type" style="display:none;">
 			<?php foreach($movies as $movie):?>
-				<p><strong><?=$movie['title']?></strong> - <?=anchor('media/edit/'.$movie['media_id'], 'edit')?>&nbsp;&nbsp;<?=anchor('media/delete/'.$book['media_id'], 'delete')?></p>
+				<p><strong><?=$movie['title']?></strong> - <?=anchor('media/edit/'.$movie['media_id'], 'edit')?>&nbsp;&nbsp;<?=anchor('media/delete/'.$movie['media_id'], 'delete')?></p>
 				<p><?php if($movie['writer'] != '') echo "Written by ".$movie['writer']; ?></p>
 				<p><?php if($movie['director'] != '') echo "Directed by ".$movie['director']; ?></p>
 				<p><?=$movie['genre']?></p>
@@ -51,7 +51,7 @@
 		</div>
 		<div id="CDs" class="type" style="display:none;">
 			<?php foreach($cds as $cd):?>
-				<p><strong><?=$cd['title']?></strong> - <?=anchor('media/edit/'.$cd['media_id'], 'edit')?>&nbsp;&nbsp;<?=anchor('media/delete/'.$book['media_id'], 'delete')?></p>
+				<p><strong><?=$cd['title']?></strong> - <?=anchor('media/edit/'.$cd['media_id'], 'edit')?>&nbsp;&nbsp;<?=anchor('media/delete/'.$cd['media_id'], 'delete')?></p>
 				<p><?php if($cd['artist'] != '') echo "By ".$cd['artist']; ?></p>
 				<p><?=$cd['genre']?></p>
 				<br /><br />
