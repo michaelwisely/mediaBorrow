@@ -20,8 +20,34 @@ class Media extends MY_controller {
 			$_POST['search'] = NULL;
 		
 		$data['title'] = 'Search Results';
-		$data['results'] = $this->media_model->search($_POST['search']);
-		$this->load->view('media_list', $data);
+		$data['search'] = $_POST['search'];
+		$results = $this->media_model->search($_POST['search']);
+		
+		
+		
+		//Figure out which media belongs to who and what type they are
+		$currentUser = $this->session->userdata('user_id');
+		$data['books'] = array();
+		$data['movies'] = array();
+		$data['cds'] = array();
+		
+		foreach($results as $media)
+		{
+			if($media['user_id'] == $currentUser)
+				$media['thisUser'] = true;
+			else
+				$media['thisUser'] = false;
+			
+			if($media['type'] == 'book')
+				array_push($data['books'], $media);
+			if($media['type'] == 'movie')
+				array_push($data['movies'], $media);
+			if($media['type'] == 'cd')
+				array_push($data['cds'], $media);
+		}
+		
+		
+		$this->load->view('search_results', $data);
 	}
 	
 	function add()
