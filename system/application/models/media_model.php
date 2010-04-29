@@ -17,7 +17,7 @@ Class Media_model extends Query
 		$this->query->addMedia($user_id, $attr['genre'], $attr['title'],
 				       $attr['type'], $attr['author'],
 				       $attr['publisher'], $attr['ISBN'],
-				       $attr['writer'], $attr['writer'], $attr['director']);
+				       $attr['artist'], $attr['writer'], $attr['director']);
 	}
 	
 	function search($search)
