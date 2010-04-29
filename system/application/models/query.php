@@ -138,7 +138,7 @@ class Query extends Model
 						AND status = \"active\";");
 	}
 
-	function deleteItem($media_id)
+	function deleteMedia($media_id)
 	{
 		return $this->db->simple_query("DELETE FROM MEDIA
 					WHERE media_id = $media_id;");
@@ -339,7 +339,7 @@ class Query extends Model
 					SET genre = \"$genre\",
 						title = \"$title\",
 						author = \"$author\",
-						publish = \"$publisher\",
+						publisher = \"$publisher\",
 						ISBN = \"$ISBN\",
 						artist = \"$artist\",
 						writer = \"$writer\",

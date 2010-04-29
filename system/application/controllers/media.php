@@ -46,8 +46,8 @@ class Media extends MY_controller {
 		if($_POST == NULL)
 		{
 			$media_id = $this->uri->segment(3);
-			$data['title'] = 'Edit Media';
 			$data['media'] = $this->media_model->mediaData($media_id);
+			$data['title'] = 'Edit '.$data['media']['title'];
 			$this->load->view('media_edit', $data);
 		}
 		else
@@ -62,8 +62,23 @@ class Media extends MY_controller {
 	
 	function delete()
 	{
-		$media_id = $this->uri->segment(3);
-		$data['media'] = $this->media_model->mediaData($media_id);
-		$this->load->view('are_you_sure', $data);
+		if($_POST == NULL)
+		{
+			$media_id = $this->uri->segment(3);
+			$media = $this->media_model->mediaData($media_id);
+			$data['title'] = 'Delete '.$media['title'];
+			$data['id'] = $media_id;
+			$data['message'] = 'Are you sure you want to delete '.$media['title'].'?';
+			$data['function'] = 'media/delete';
+			$this->load->view('are_you_sure', $data);
+		}
+		else
+		{
+			$this->media_model->delete($_POST['id']);
+			
+			$data['title'] = 'Media Deleted';
+			$data['message'] = 'Your media has been deleted.';
+			$this->load->view('confirmation', $data);
+		}
 	}
 }
