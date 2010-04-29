@@ -336,16 +336,16 @@ class Query extends Model
 			      
 	{			
 		return $this->db->query("UPDATE MEDIA
-					SET genre = $genre,
-						title = $title,
-						author = $author,
-						publish = $publisher,
-						ISBN = $ISBN,
-						artist = $artist,
-						writer = $writer,
-						director = $director
-					WHERE MEDIA.media_id = $media_id
-						AND MEDIA.user_id = $user_id");
+					SET genre = \"$genre\",
+						title = \"$title\",
+						author = \"$author\",
+						publish = \"$publisher\",
+						ISBN = \"$ISBN\",
+						artist = \"$artist\",
+						writer = \"$writer\",
+						director = \"$director\"
+					WHERE MEDIA.media_id = \"$media_id\"
+						AND MEDIA.user_id = \"$user_id\"");
 	}
 
 }
