@@ -347,6 +347,37 @@ class Query extends Model
 					WHERE MEDIA.media_id = $media_id
 						AND MEDIA.user_id = \"$user_id\"");
 	}
+	
+	function install($post)
+	{
+		//create all the tables in the database
+		$zips = 'CREATE TABLE ZIPS( zip char(5) NOT NULL, city varchar(50) NOT NULL, state varchar(20) NOT NULL, PRIMARY KEY (zip) )ENGINE = InnoDB;';
+		$this->db->query($zips);
+		
+		$users = 'CREATE TABLE USERS( user_id varchar(50) NOT NULL, email varchar(100) NOT NULL UNIQUE, password varchar(50) NOT NULL, zip char(5) NOT NULL, fname varchar(50) NOT NULL, lname varchar(50) NOT NULL, dob varchar(10), area varchar(20), PRIMARY KEY (user_id), FOREIGN KEY (zip) REFERENCES ZIPS(zip) )ENGINE = InnoDB;';
+		$this->db->query($users);
+		
+		$suggestions = 'CREATE TABLE SUGGESTIONS( user_id varchar(50) NOT NULL, topic varchar(100) NOT NULL, time_stamp integer NOT NULL, suggestion text, PRIMARY KEY (user_id, time_stamp), FOREIGN KEY (user_id) REFERENCES USERS(user_id) ON DELETE CASCADE)ENGINE = InnoDB;';
+		$this->db->query($suggestions);
+		
+		$refers = 'CREATE TABLE REFERS( user_id varchar(50) NOT NULL, email varchar(50) NOT NULL, name varchar(100), PRIMARY KEY (user_id, email), FOREIGN KEY (user_id) REFERENCES USERS(user_id) ON DELETE CASCADE )ENGINE = InnoDB;';
+		$this->db->query($refers);
+		
+		$friends = 'CREATE TABLE FRIENDS( user_id1 varchar(50) NOT NULL, user_id2 varchar(50) NOT NULL, pending varchar(5) NOT NULL, PRIMARY KEY (user_id1, user_id2), FOREIGN KEY (user_id1) REFERENCES USERS(user_id) ON DELETE CASCADE, FOREIGN KEY (user_id2) REFERENCES USERS(user_id) ON DELETE CASCADE, CHECK (user_id1 != user_id2) )ENGINE = InnoDB;';
+		$this->db->query($friends);
+		
+		$media = 'CREATE TABLE MEDIA( media_id integer NOT NULL AUTO_INCREMENT, user_id varchar(50) NOT NULL, genre varchar(50) NOT NULL, title varchar(200) NOT NULL, type varchar(20) NOT NULL, author varchar(100), publisher varchar(100), ISBN varchar(40), artist varchar(100), writer varchar(100), director varchar(100), PRIMARY KEY (media_id), FOREIGN KEY (user_id) REFERENCES USERS(user_id) ON DELETE CASCADE)ENGINE = InnoDB;';
+		$this->db->query($media);
+		
+		$borrows = 'CREATE TABLE BORROWS( user_id varchar(50) NOT NULL, media_id integer NOT NULL, status varchar(15) NOT NULL, start_date integer NOT NULL, return_date integer, PRIMARY KEY (user_id, media_id, start_date), FOREIGN KEY (user_id) REFERENCES USERS(user_id) ON DELETE CASCADE, FOREIGN KEY (media_id) REFERENCES MEDIA(media_id) ON DELETE CASCADE )ENGINE = InnoDB;';
+		$this->db->query($borrows);
+		
+		$comments = 'CREATE TABLE COMMENTS( user_id varchar(50) NOT NULL, media_id integer NOT NULL, comment text, rating integer, time_stamp integer NOT NULL, PRIMARY KEY (user_id, media_id), FOREIGN KEY (user_id) REFERENCES USERS(user_id) ON DELETE CASCADE, FOREIGN KEY (media_id) REFERENCES MEDIA(media_id) ON DELETE CASCADE )ENGINE = InnoDB;';
+		$this->db->query($comments);
+		
+		//insert the first user into the database
+		$this->addNewUser($post['user_id'], $post['email'], $post['password'], $post['zip'], $post['fname'], $post['lname'], $post['day'], $post['month'], $post['year']);
+	}
 
 }
 
