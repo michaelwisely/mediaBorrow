@@ -42,7 +42,7 @@ class Query extends Model
 	{
 		return $this->db->query("SELECT *
 					FROM USERS
-					WHERE media_id = \"$media_id\";");
+					WHERE media_id = $media_id;");
 	}
 
 	function addMedia($user_id, $genre, $title, $type,
@@ -344,7 +344,7 @@ class Query extends Model
 						artist = \"$artist\",
 						writer = \"$writer\",
 						director = \"$director\"
-					WHERE MEDIA.media_id = \"$media_id\"
+					WHERE MEDIA.media_id = $media_id
 						AND MEDIA.user_id = \"$user_id\"");
 	}
 
