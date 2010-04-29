@@ -5,6 +5,11 @@
 	<?php foreach($books as $book):?>
 		<li><?=$book['title']?></li>
 	<?php endforeach;?>
+	<br>
+	<h2>Friend Requests:</h2>
+	<?php foreach($requests as $req):?>
+		<li><?=$req?></li>
+	<?php endforeach;?>
 </div>
 </body>
 </html>

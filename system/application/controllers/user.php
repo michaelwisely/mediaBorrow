@@ -14,6 +14,32 @@ class User extends Controller {
 		$this->load->model('user_model');
 	}
 	
+	function profile()
+	{
+		if ($this->uri->segment(1))
+		{
+			$data['user_id']=$this->uri->segment(1);
+		}
+		else
+		{
+			$data['user_id'] = $this->user_model->currentUser();	
+		}
+		$data['userData'] = $this->user_model->userData($data['user_id']);
+		$data['title'] = $data['user_id']." ".$data['user_id']."'s Profile";
+		$this->load->view('profile', $data);
+	}
+	
+	function friends()
+	{
+		$user_id = $this->user_model->currentUser();
+		$userInfo = $this->user_model->userData($user_id);
+		$friendArray = $this->user_model->getFriends($user_id);
+		$data['friends'] = $friendArray['friends'];
+		$data['requests'] = $friendArray['requests'];
+		$data['title'] = $userInfo['fname'];
+		$this->load->view('friends', $data);
+	}
+	
 	function index()
 	{	
 		if(!$this->session->userdata('logged_in'))

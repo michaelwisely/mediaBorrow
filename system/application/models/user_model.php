@@ -70,6 +70,8 @@ Class User_model extends Query
 	{
 		$query = $this->query->userData($user_id);
 		
+		$userData = array();
+		
 		foreach($query->result_array() as $user)
 			foreach($user as $attribute => $value)
 				$userData[$attribute] = $value;
@@ -102,11 +104,11 @@ Class User_model extends Query
 		$reqFriends = array();
 		$curFriends = array();
 		
-		foreach($query->result_array() as $user)
+		foreach($query->result_array() as $friend)
 			foreach($friend as $attribute => $value)
 				array_push($reqFriends, $value);
 				
-		foreach($query2->result_array() as $user)
+		foreach($query2->result_array() as $friend)
 			foreach($friend as $attribute => $value)
 				array_push($curFriends, $value);
 		

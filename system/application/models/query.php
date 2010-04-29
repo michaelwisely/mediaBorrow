@@ -79,10 +79,10 @@ class Query extends Model
 
 	function getFriendRequests($user_id)
 	{
-		return $this->db->query("SELECT user_id2
+		return $this->db->query("SELECT user_id1
 					FROM FRIENDS
 					WHERE pending = \"true\"
-					  AND user_id1 = \"$user_id\";");
+					  AND user_id2 = \"$user_id\";");
 	}
 
 	function addcomment($user_id, $media_id, $comment_text, $rating)
