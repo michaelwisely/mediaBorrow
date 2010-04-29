@@ -1,20 +1,15 @@
 <?=$this->load->view('header')?>
 <div id="container">
 	<div id="sidebar">
-		sdf
-		sdf
+		<h4><strong>Information about <?=$userData['fname']?></strong></h4>
+		<p><strong>City</strong> - <?=$userData['city']?>, <?=$userData['state']?></p>
+		<p><strong>Zip code</strong> - <?=$userData['zip']?></p>
+		<p><strong>Birth date</strong> - <?=birthday($userData['dob'])?>
 	</div>
 	
 	<div id="main">
-		<h1><?=$userData['fname']?> <?=$userData['lname']?></h1>
-		<h2>Books:</h2>
-		<?php foreach($books as $book):?>
-			<li><?=$book['title']?></li>
-		<?php endforeach;?>
-		<h2>Friend Requests:</h2>
-		<?php foreach($requests as $req):?>
-			<li><?=$req?></li>
-		<?php endforeach;?>
+		<h2><?=$userData['fname']?>'s media</h2><br /><br />
+		<?=$this->load->view('media_list')?>
 	</div>
 </div>
 </body>
