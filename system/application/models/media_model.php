@@ -25,6 +25,15 @@ Class Media_model extends Query
 		
 		return $query->result_array();
 	}
+	
+	function modify_media($attr)
+	{
+		$this->query->modify_media($attr['media_id'], $attr['user_id'], $attr['genre', 
+					   $attr['title'], $attr['author'], $attr['publisher'], 
+					   $attr['ISBN'], $attr['artist'], $attr['writer'],
+			      		   $attr['director']);
+	}
+
 }
 
 ?>
