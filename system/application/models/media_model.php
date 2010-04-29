@@ -14,15 +14,30 @@ Class Media_model extends Query
 		
 		$user_id = $CI->user_model->currentUser();
 		
-		$this->query->addMedia($user_id, $attr['genre'], $attr['title'], $attr['type'], $attr['author'], $attr['publisher'], $attr['ISBN'], $attr['writer'], $attr['writer'], $attr['director']);
+		$this->query->addMedia($user_id, $attr['genre'], $attr['title'],
+				       $attr['type'], $attr['author'],
+				       $attr['publisher'], $attr['ISBN'],
+				       $attr['writer'], $attr['writer'], $attr['director']);
 	}
 	
 	function search($search)
 	{
 		$query = $this->query->searchForTitle($search);
 		
+		return $query->result_array();
+	}
+	
+	function modify_media($attr)
+	{
+		$this->query->modify_media($attr['media_id'], $attr['user_id'], $attr['genre'], 
+					   $attr['title'], $attr['author'], $attr['publisher'], 
+					   $attr['ISBN'], $attr['artist'], $attr['writer'],
+			      		   $attr['director']);
+	}
 		
-		
+	function mediaData($media_id)
+	{
+		$query = $this->query->mediaData($media_id);
 		return $query->result_array();
 	}
 }

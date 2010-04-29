@@ -19,5 +19,6 @@ class Friend extends MY_controller {
 		$data['title'] = $userInfo['fname'];
 		$this->load->view('friends', $data);
 	}
+}
 	
 ?>
