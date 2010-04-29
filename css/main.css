@@ -35,9 +35,34 @@
   width: 700px;
   margin: 0 auto;
   padding: 20px 0 20px 0;
+  clear: both;
 }
+#sidebar {
+  float: right;
+  width: 200px;
+  padding: 8px 0 20px 6px;
+  border-left: solid #444444 2px;
+}
+#main { width: 460px; }
 h1 { margin-bottom: 16px; }
 h3, p { margin-bottom: 10px; }
+a {
+  color: #444444;
+  text-decoration: underline;
+}
+a:hover { text-decoration: none; }
+.selectors {
+  text-align: center;
+  width: 100%;
+  border-bottom: solid #dddddd 2px;
+  margin-bottom: 16px;
+}
+.selectors a {
+  padding: 0 15px 0 15px;
+  font-size: 20px;
+  text-decoration: none;
+}
+.selected { color: black; }
 form table { border-collapse: collapse; }
 form tr { border-collapse: collapse; }
 form td.outside { border-bottom: none; }

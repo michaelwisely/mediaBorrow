@@ -14,6 +14,8 @@
 	<div id="header">
 		<h2><a href="<?=base_url()?>">MediaBorrow</a></h2>
 		<span id="right">
+			<?=anchor('account/edit', 'Account')?>
+			&nbsp;&nbsp;&nbsp;
 			<?=anchor('logout', 'Logout')?>
 			&nbsp;&nbsp;&nbsp;
 			<?php

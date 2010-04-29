@@ -51,6 +51,7 @@ $route['logout'] = 'user/logout';
 //delete these later! this is only for phase 2
 $route['add/media'] = 'media/add';
 $route['search/media'] = 'media/search';
+$route['account/edit'] = 'user/edit';
 
 
 /* End of file routes.php */

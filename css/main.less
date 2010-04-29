@@ -1,5 +1,9 @@
 @width: 700px;
+@side_width: 200px;
+@spacing: 40px;
 
+@header_color: #ddd;
+@header_background: #444;
 
 *, body{margin:0; padding:none; font-family: Helvetica, Arial, sans-serif;}
 
@@ -7,8 +11,8 @@
 	display: block;
 	width: 100%;
 	height: 40px;
-	background: #444;
-	color: #ddd;
+	background: @header_background;
+	color: @header_color;
 }
 #header{
 	position: relative;
@@ -39,8 +43,24 @@ above is for the header
 	width: @width;
 	margin: 0 auto;
 	padding: 20px 0 20px 0;
-	background: ;
+	clear: both;
 }
+
+/*---------------------
+this is for the sidebar
+---------------------*/
+#sidebar{
+	float: right;
+	width: @side_width;
+	padding: 8px 0 20px 6px;
+	border-left: solid @header_background 2px;
+
+}
+
+#main{
+	width: @width - (@side_width + @spacing);
+}
+
 h1{
 	margin-bottom: 16px;
 }
@@ -52,6 +72,28 @@ h3{
 p{
 	margin-bottom: 10px;
 }
+
+a{
+	color: @header_background;
+	text-decoration: underline;
+	:hover {text-decoration: none}
+}
+
+.selectors{
+	text-align: center;
+	width: 100%;
+	border-bottom: solid @header_color 2px;
+	margin-bottom: 16px;
+	a{
+		padding: 0 15px 0 15px;
+		font-size: 20px;
+		text-decoration: none;
+	}
+}
+.selected{
+	color: black;
+}
+
 form{
 	table {border-collapse: collapse;}
 	tr {border-collapse: collapse;}
