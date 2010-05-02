@@ -194,10 +194,9 @@ class Query extends Model
  
 	function makeSiteSuggestion($user_id, $topic, $suggestion)
 	{
-		$curr_time = getdate();
-		$time = $curr_time['year']."-".$curr_time['mon']."-".
-			$curr_time['mday']." ".$curr_time['hours'].":".
-			$curr_time['minutes'].":".$curr_time['seconds'];
+		$time = mktime();
+		$topic = strtolower($topic);
+		
 		return $this->db->simple_query("INSERT INTO SUGGESTIONS
 						VALUES(\"$user_id\", \"$topic\",
 							\"$time\", \"$suggestion\");");
