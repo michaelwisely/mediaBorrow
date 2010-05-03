@@ -1,10 +1,25 @@
 <?php
 
-class Comment_model extends Query
-{
-	function Comment_model()
+class comment extends MY_controller {
+
+	function __construct()
 	{
-		parent::Query();
+		parent::__construct();
+		
+		$this->load->model('comment_model');
 	}
 	
+	function index()
+	{
+		if($_POST == NULL)
+			redirect('');
+		else
+		{
+			$this->comment_model->add($_POST);
+			
+			redirect('media/view/'.$_POST['media_id']);
+		}
+	}
 }
+	
+?>

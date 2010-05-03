@@ -19,7 +19,7 @@
 <div id="booklist" class="type">
 	<?php if(sizeof($books) == 0) echo "No books"; ?>
 	<?php foreach($books as $book):?>
-		<p><strong><?=$book['title']?></strong> - 
+		<p><strong><?=anchor('media/view/'.$book['media_id'], $book['title'])?></strong> - 
 			<?php if((!isset($book['thisUser'])) || $book['thisUser']): ?>
 			<?=anchor('media/edit/'.$book['media_id'], 'edit')?>&nbsp;&nbsp;<?=anchor('media/delete/'.$book['media_id'], 'delete')?>
 			<?php else: ?>
@@ -37,7 +37,7 @@
 <div id="movielist" class="type" style="display:none;">
 	<?php if(sizeof($movies) == 0) echo "No movies"; ?>
 	<?php foreach($movies as $movie):?>
-		<p><strong><?=$movie['title']?></strong> - 
+		<p><strong><?=anchor('media/view/'.$movie['media_id'], $movie['title'])?></strong> - 
 			<?php if((!isset($movie['thisUser'])) || $movie['thisUser']): ?>
 			<?=anchor('media/edit/'.$movie['media_id'], 'edit')?>&nbsp;&nbsp;<?=anchor('media/delete/'.$movie['media_id'], 'delete')?>
 			<?php else: ?>
@@ -54,7 +54,7 @@
 <div id="cdlist" class="type" style="display:none;">
 	<?php if(sizeof($cds) == 0) echo "No CDs"; ?>
 	<?php foreach($cds as $cd):?>
-		<p><strong><?=$cd['title']?></strong> - 
+		<p><strong><?=anchor('media/view/'.$cd['media_id'], $cd['title'])?></strong> - 
 			<?php if((!isset($cd['thisUser'])) || $cd['thisUser']): ?>
 			<?=anchor('media/edit/'.$cd['media_id'], 'edit')?>&nbsp;&nbsp;<?=anchor('media/delete/'.$cd['media_id'], 'delete')?>
 			<?php else: ?>

@@ -42,7 +42,7 @@ class Query extends Model
 	{
 		return $this->db->query("SELECT *
 					FROM MEDIA
-					WHERE media_id = $media_id;");
+					WHERE media_id = \"$media_id\";");
 	}
 
 	function addMedia($user_id, $genre, $title, $type,
@@ -96,10 +96,8 @@ class Query extends Model
 
 	function addcomment($user_id, $media_id, $comment_text, $rating)
 	{
-		$curr_time = getdate();
-		$time = $curr_time['year']."-".$curr_time['mon']."-".
-			$curr_time['mday']." ".$curr_time['hours'].":".
-			$curr_time['minutes'].":".$curr_time['seconds'];
+		$time = mktime();
+		
 		return $this->db->simple_query("INSERT INTO COMMENTS
 						VALUES(\"$user_id\", $media_id,
 							\"$comment_text\", $rating, \"$time\");");
@@ -228,9 +226,10 @@ class Query extends Model
 
 	function getComments($media_id)
 	{
-		return $this->db->query("SELECT comment
+		return $this->db->query("SELECT *
 					FROM COMMENTS
-					WHERE media_id = $media_id;");
+					WHERE media_id = \"$media_id\"
+					ORDER BY time_stamp DESC;");
 	}
 
 	function getBorrowRequests($user_id)

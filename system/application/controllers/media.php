@@ -109,4 +109,15 @@ class Media extends MY_controller {
 			$this->load->view('confirmation', $data);
 		}
 	}
+	
+	function view()
+	{
+		$this->load->model('comment_model');
+		
+		$data['media'] = $this->media_model->mediaData($this->uri->segment(3));
+		$data['title'] = $data['media']['title'];
+		$data['comments'] = $this->comment_model->getComments($data['media']['media_id']);
+		
+		$this->load->view('media', $data);
+	}
 }
