@@ -114,10 +114,10 @@ class Query extends Model
 
 	function requestBorrow($borrower_id, $media_id)
 	{
-		
+		$start_date = mktime();
 		return $this->db->simple_query("INSERT INTO BORROWS
 						 VALUES(\"$borrower_id\", $media_id,
-							\"pending\", NULL, NULL);");
+							\"pending\", $start_date, NULL);");
 	}
 
 	function approveBorrow($borrower_id, $media_id, $start_date, $return_date)
@@ -234,10 +234,11 @@ class Query extends Model
 
 	function getBorrowRequests($user_id)
 	{
-		return $this->db->query("SELECT b.media_id, b.user_id
-					FROM BORROWS b
-					WHERE status = 'pending'
-					  AND borrows.user_id = \"$user_id\"; ");
+		return $this->db->query("SELECT m.media_id, m.title, b.user_id
+					FROM BORROWS b, MEDIA m
+					WHERE b.status = 'pending'
+					  AND m.user_id = \"$user_id\"
+					  AND b.media_id = m.media_id; ");
 	}
 
 	function searchForTitle($title = NULL)
