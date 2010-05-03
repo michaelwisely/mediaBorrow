@@ -165,10 +165,10 @@ class Query extends Model
 						AND time_stamp = \"$time_stamp\";");
 	} 
 
-	function inviteNewUser($new_user_email, $new_user_name)
+	function inviteNewUser($user_id, $new_user_email, $new_user_name)
 	{
 		return $this->db->simple_query("INSERT INTO REFERS
-						VALUES (current_user_ID,
+						VALUES (\"$user_id\",
 							\"$new_user_email\",
 							\"$new_user_name\");");
 	}
