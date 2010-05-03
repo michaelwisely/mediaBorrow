@@ -108,7 +108,7 @@ $autoload['language'] = array();
 |
 */
 
-$autoload['model'] = array('query');
+$autoload['model'] = array('query', 'user_model');
 
 
 
