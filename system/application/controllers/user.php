@@ -62,6 +62,7 @@ class User extends Controller {
 		else
 		{
 			$this->load->model('friend_model');
+			$this->load->model('borrow_model');
 			
 			$data['user_id'] = $this->user_model->currentUser();
 			$data['userData'] = $this->user_model->userData($data['user_id']);
@@ -72,6 +73,8 @@ class User extends Controller {
 			$friendInfo = $this->friend_model->getFriends($user_id);
 			$libInfo = $this->user_model->getLibraryInformation($user_id);
 			
+			$borrowInfo = $this->borrow_model->getBorrowRequests($user_id);
+			
 			//Each of these is an associative array in the form
 			//   ['title'=>'bleh', 'type'=>'bleh'........]
 			$data['books'] = $libInfo['books'];
@@ -80,7 +83,9 @@ class User extends Controller {
 			
 			//This is an arsay with the form
 			//  ['kyle', 'jared', 'mike'.....]
-			$data['requests'] = $friendInfo['requests'];
+			$data['friend_requests'] = $friendInfo['requests'];
+			
+			$data['borrow_requests'] = $borrowInfo;
 			
 			$this->load->view('home', $data);
 		}

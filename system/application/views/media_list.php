@@ -23,7 +23,7 @@
 			<?php if((!isset($book['thisUser'])) || $book['thisUser']): ?>
 			<?=anchor('media/edit/'.$book['media_id'], 'edit')?>&nbsp;&nbsp;<?=anchor('media/delete/'.$book['media_id'], 'delete')?>
 			<?php else: ?>
-			belongs to <?=$book['user_id']?> <?=anchor('media/borrow/'.$book['media_id'], 'borrow')?>
+			belongs to <?=$book['user_id']?> <?=anchor('borrow/request/'.$book['media_id'], 'borrow')?>
 			<?php endif; ?>
 		</p>
 		<p><?php if($book['author'] != '') echo "By ".$book['author']; ?></p>
@@ -41,7 +41,7 @@
 			<?php if((!isset($movie['thisUser'])) || $movie['thisUser']): ?>
 			<?=anchor('media/edit/'.$movie['media_id'], 'edit')?>&nbsp;&nbsp;<?=anchor('media/delete/'.$movie['media_id'], 'delete')?>
 			<?php else: ?>
-			belongs to <?=$movie['user_id']?> <?=anchor('media/borrow/'.$movie['media_id'], 'borrow')?>
+			belongs to <?=$movie['user_id']?> <?=anchor('borrow/request/'.$movie['media_id'], 'borrow')?>
 			<?php endif; ?>
 		</p>
 		<p><?php if($movie['writer'] != '') echo "Written by ".$movie['writer']; ?></p>
@@ -58,7 +58,7 @@
 			<?php if((!isset($cd['thisUser'])) || $cd['thisUser']): ?>
 			<?=anchor('media/edit/'.$cd['media_id'], 'edit')?>&nbsp;&nbsp;<?=anchor('media/delete/'.$cd['media_id'], 'delete')?>
 			<?php else: ?>
-			belongs to <?=$cd['user_id']?> <?=anchor('media/borrow/'.$cd['media_id'], 'borrow')?>
+			belongs to <?=$cd['user_id']?> <?=anchor('borrow/request'.$cd['media_id'], 'borrow')?>
 			<?php endif; ?>
 		</p>
 		<p><?php if($cd['artist'] != '') echo "By ".$cd['artist']; ?></p>

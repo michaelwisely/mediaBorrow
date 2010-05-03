@@ -2,7 +2,16 @@
 
 <div id="container">
 	<div id="sidebar">
-		This is where friend requests and borrow requests will be viewed.
+		<h3> Borrow Requests </h3>
+		<?php if ( sizeof($borrow_requests) > 0 ): ?>
+			<ul>
+				<?php foreach($borrow_requests as $b_request): ?>
+				<li> <?=$b_request['user_id']?> wants to borrow <?= $b_request['title']?></li>
+				<?php endforeach; ?>
+			</ul>
+		<?php else: ?>
+			<p> No new borrow requests! </p>
+		<?php endif; ?>
 	</div>
 	
 	<div id="main">

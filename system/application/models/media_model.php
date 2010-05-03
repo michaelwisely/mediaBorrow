@@ -28,9 +28,7 @@ Class Media_model extends Query
 	}
 	
 	function modify_media($attr)
-	{
-		
-		
+	{	
 		$this->query->modify_media($attr['media_id'], $this->session->userdata('user_id'), $attr['genre'], 
 					   $attr['title'], $attr['author'], $attr['publisher'], 
 					   $attr['ISBN'], $attr['artist'], $attr['writer'],
