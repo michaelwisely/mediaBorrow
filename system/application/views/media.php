@@ -18,7 +18,7 @@
 		{
 			showHide();
 		}
-		$.scrollTo($('#comment_form'));
+		$.scrollTo($('#comment_form'), 350);
 	}
 	
 	$(document).ready(function(){
