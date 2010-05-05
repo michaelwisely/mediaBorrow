@@ -14,7 +14,17 @@ class Comment_model extends Query
 		
 		$user_id = $CI->user_model->currentUser();
 		
-		$this->query->addcomment($user_id, $post['media_id'], $post['comment'], $post['rating']);
+		$this->query->addComment($user_id, $post['media_id'], $post['comment'], $post['rating']);
+	}
+	
+	function edit($post)
+	{
+		$CI =& get_instance();
+		$CI->load->model('user_model');
+		
+		$user_id = $CI->user_model->currentUser();
+		
+		$this->query->editComment($user_id, $post['media_id'], $post['comment'], $post['rating']);
 	}
 	
 	function getComments($media_id)

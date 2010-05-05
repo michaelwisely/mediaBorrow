@@ -76,3 +76,13 @@ form th {
   padding: 0 5px 4px 20px;
   text-align: left;
 }
+.comment {
+  border-top: solid #444444 2px;
+  padding: 4px;
+  margin-bottom: 10px;
+}
+.owner {
+  background: #444444;
+  color: #ffffff;
+}
+.owner a { color: #dddddd; }

@@ -1,4 +1,4 @@
-<?=$this->load->view('header')?>
+<?=$this->load->view('header', array('profile' => false))?>
 
 <div id="container">
 	<div id="sidebar">

@@ -94,13 +94,23 @@ class Query extends Model
 					  AND user_id2 = \"$user_id\";");
 	}
 
-	function addcomment($user_id, $media_id, $comment_text, $rating)
+	function addComment($user_id, $media_id, $comment_text, $rating)
 	{
 		$time = mktime();
 		
 		return $this->db->simple_query("INSERT INTO COMMENTS
 						VALUES(\"$user_id\", $media_id,
 							\"$comment_text\", $rating, \"$time\");");
+	}
+	
+	function editComment($user_id, $media_id, $comment_text, $rating)
+	{
+		$time = mktime();
+		
+		return $this->db->simple_query("UPDATE COMMENTS
+						SET comment = \"$comment_text\", rating = \"$rating\", time_stamp = \"$time\"
+						WHERE user_id = \"$user_id\"
+						AND media_id = \"$media_id\";");
 	}
 	
 	function getCityStateForZip($zip)

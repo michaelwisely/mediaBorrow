@@ -9,7 +9,7 @@
 	
 	<div id="main">
 		<h2><?=$userData['fname']?>'s media</h2><br /><br />
-		<?=$this->load->view('media_list')?>
+		<?=$this->load->view('media_list', array('profile' => true))?>
 	</div>
 </div>
 </body>

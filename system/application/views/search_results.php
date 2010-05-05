@@ -8,7 +8,7 @@
 			<input type="submit" value="search" />
 		</p><br /><br />
 		
-		<?=$this->load->view('media_list')?>
+		<?=$this->load->view('media_list', array('profile' => false))?>
 	</div>
 </div>
 </body>
