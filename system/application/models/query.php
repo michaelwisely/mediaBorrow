@@ -129,15 +129,80 @@ class Query extends Model
 						 VALUES(\"$borrower_id\", $media_id,
 							\"pending\", $start_date, NULL);");
 	}
+	
+	function isRequested($borrower_id, $media_id)
+	{
+		$table = $this->db->query("SELECT *
+					  FROM BORROWS
+					  WHERE user_id = \"$borrower_id\"
+					    AND media_id = $media_id
+					    AND status = 'pending';");
+		if ($table->num_rows() > 0 )
+		{
+			return "pending";
+		}
+		$table = $this->db->query("SELECT *
+					  FROM BORROWS
+					  WHERE user_id = \"$borrower_id\"
+					    AND media_id = $media_id
+					    AND status = 'active';");
+		if ($table->num_rows() > 0 )
+		{
+			return "active";
+		}
+		$table = $this->db->query("SELECT *
+					  FROM BORROWS
+					  WHERE user_id = \"$borrower_id\"
+					    AND media_id = $media_id
+					    AND status = 'confirmed';");
+		if ($table->num_rows() > 0 )
+		{
+			return "confirmed";
+		}
 
-	function approveBorrow($borrower_id, $media_id, $start_date, $return_date)
+		else
+		{
+			return false;
+		}
+	}
+	
+	function isCheckedOut($media_id)
+	{
+		$table = $this->db->query("SELECT user_id
+					  FROM BORROWS
+					  WHERE media_id = $media_id
+					    AND (status = 'active'
+						OR status = 'confirmed'); ");
+		if ($table->num_rows() > 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
+	function approveBorrow($borrower_id, $media_id, $start_date)
 	{
 		return $this->db->simple_query("UPDATE BORROWS
-						SET status = 'confirmed', start_date = \"$start_date\", end_date = NULL
-						WHERE = \"$borrower_id\" AND media_id = $media_id AND status = 'pending';");
+						SET status = 'confirmed'
+						WHERE user_id= \"$borrower_id\"
+						  AND media_id = $media_id
+						  AND start_date = $start_date
+						  AND status = 'pending';");
+	}
+	
+	function refuseBorrow($borrower_id, $media_id, $start_date)
+	{
+		return $this->db->simple_query("DELETE FROM BORROWS
+						WHERE user_id= \"$borrower_id\"
+						  AND media_id = $media_id
+						  AND start_date = $start_date
+						  AND status = 'pending';");
 	}
 
-	function lendItem($borower_id, $media_id)
+	function lendItem($borrower_id, $media_id)
 	{
 		return $this->db->simple_query("UPDATE BORROWS
 						SET status = 'active'
@@ -146,13 +211,17 @@ class Query extends Model
 						AND status = 'confirmed';");
 	}
 
-	function returnItem($user_id, $media_id)
+	function returnItem($user_id, $media_id, $start_date)
 	{
-		return $this->db->simple_query("UPDATE borrows
-						SET status = \"returned\"
-						WHERE where user_id = \"$user_id\"
+		$return_date = mktime();
+		
+		return $this->db->simple_query("UPDATE BORROWS
+						SET status = 'returned', return_date = $return_date
+						WHERE user_id = \"$user_id\"
 						AND media_id = $media_id
-						AND status = \"active\";");
+						AND start_date = $start_date
+						AND status = 'active';");
+		
 	}
 
 	function deleteMedia($media_id)
@@ -219,19 +288,28 @@ class Query extends Model
 
 	function getBorrowItemsBorrowedBy($user_id)
 	{
-		return $this->db->query("SELECT title, type
+		$table = $this->db->query("SELECT m.title, m.type, b.status, b.start_date, m.user_id, m.media_id
 					FROM BORROWS b, MEDIA m
 					WHERE b.user_id = \"$user_id\"
 					  AND b.media_id = m.media_id;");
+		return $table->result_array();
 	}
 
 	function getItemsLentOutBy($user_id)
 	{
-		return $this->db->query("SELECT b.user_id
+		$table = $this->db->query("SELECT b.user_id, b.media_id, b.start_date, m.title
 					FROM MEDIA m, BORROWS b
 					WHERE m.user_id = \"$user_id\"
 					  AND m.media_id = b.media_id 
-					  AND status = 'active';");
+					  AND status = 'active'; ");
+		$data['active'] = $table->result_array();
+		$table = $this->db->query("SELECT b.user_id, b.media_id, b.start_date, m.title
+					FROM MEDIA m, BORROWS b
+					WHERE m.user_id = \"$user_id\"
+					  AND m.media_id = b.media_id 
+					  AND status = 'confirmed';");
+		$data['confirmed'] = $table->result_array();
+		return $data;
 	}
 
 	function getComments($media_id)
@@ -244,7 +322,7 @@ class Query extends Model
 
 	function getBorrowRequests($user_id)
 	{
-		return $this->db->query("SELECT m.media_id, m.title, b.user_id
+		return $this->db->query("SELECT m.media_id, m.title, m.media_id, b.user_id, b.start_date
 					FROM BORROWS b, MEDIA m
 					WHERE b.status = 'pending'
 					  AND m.user_id = \"$user_id\"

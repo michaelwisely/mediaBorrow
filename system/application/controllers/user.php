@@ -74,6 +74,8 @@ class User extends Controller {
 			$libInfo = $this->user_model->getLibraryInformation($user_id);
 			
 			$borrowInfo = $this->borrow_model->getBorrowRequests($user_id);
+			$borredItems = $this->borrow_model->getBorrowItemsBorrowedBy($user_id);
+			$lendInfo = $this->borrow_model->getLends($user_id);
 			
 			//Each of these is an associative array in the form
 			//   ['title'=>'bleh', 'type'=>'bleh'........]
@@ -84,8 +86,18 @@ class User extends Controller {
 			//This is an arsay with the form
 			//  ['kyle', 'jared', 'mike'.....]
 			$data['friend_requests'] = $friendInfo['requests'];
+			$data['borrowed_items'] = $borredItems;
 			
-			$data['borrow_requests'] = $borrowInfo;
+			$data['borrow_requests'] = array();
+			foreach($borrowInfo as $b)
+			{
+				if (! $this->borrow_model->isCheckedOut($b['media_id']))
+				{
+					array_push($data['borrow_requests'], $b);
+				}
+			}
+			
+			$data['lends'] = $lendInfo;
 			
 			$this->load->view('home', $data);
 		}
