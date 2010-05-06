@@ -123,7 +123,7 @@ class Query extends Model
 	function approveBorrow($borrower_id, $media_id, $start_date, $return_date)
 	{
 		return $this->db->simple_query("UPDATE BORROWS
-						SET status = 'confirmed', start_date = \"$start_date\", end_date = \"$end_date\"
+						SET status = 'confirmed', start_date = \"$start_date\", end_date = NULL
 						WHERE = \"$borrower_id\" AND media_id = $media_id AND status = 'pending';");
 	}
 
