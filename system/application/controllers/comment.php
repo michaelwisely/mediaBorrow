@@ -20,6 +20,18 @@ class comment extends MY_controller {
 			redirect('media/view/'.$_POST['media_id']);
 		}
 	}
+	
+	function edit()
+	{
+		if($_POST == NULL)
+			redirect('');
+		else
+		{
+			$this->comment_model->edit($_POST);
+			
+			redirect('media/view/'.$_POST['media_id']);
+		}
+	}
 }
 	
 ?>

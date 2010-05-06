@@ -1,12 +1,26 @@
 <?=$this->load->view('header')?>
 
-<script>
+<script type="text/javascript" src="<?=base_url().'js/jquery.scrollTo.js'?>"></script>
+<script type="text/javascript">
+	var commentVisible=new Boolean(false);
+	
 	function showHide()
 	{
 		$('#comment_form').animate({
 			height: 'toggle'
 		}, 300);
+		commentVisible = ~commentVisible;
 	}
+	
+	function editButton()
+	{
+		if(commentVisible == false)
+		{
+			showHide();
+		}
+		$.scrollTo($('#comment_form'), 350);
+	}
+	
 	$(document).ready(function(){
 		$("#comment_form").validate({
 			rules: {
@@ -19,7 +33,12 @@
 
 <div id="container">
 	<div id="sidebar">
-		<p>this is where we will indicate wether or not it is available for borrowing, borrow button, edit button, delete button, ETC.</p>
+		<?php if($this->session->userdata('user_id') == $media['user_id']): ?>
+			<p><?=anchor('media/edit/'.$media['media_id'], 'edit')?></p>
+			<p><?=anchor('media/delete/'.$media['media_id'], 'delete')?></p>
+		<?php else: ?>
+			<p><?=anchor('borrow/request/'.$media['media_id'], 'request to borrow this '.$media['type'])?></p>
+		<?php endif; ?>
 	</div>
 	
 	<div id="main">
@@ -52,23 +71,55 @@
 		
 		<br /><br /><br />
 		
-		<h2>Comments (<?=sizeOf($comments)?>) &nbsp;&nbsp;<span style="font-size:60%;"><a href="#" onClick="showHide(); return false;">Write Comment</a></span></h2>
-		<?=form_open('comment', array('id' => 'comment_form', 'style' => 'display: none;'))?>
-		<br />
-		Rating: <?=form_dropdown('rating', array('1' => '1', '2' => '2', '3' => '3', '4' => '4', '5' => '5'))?>
-		<br /><br />
-		<?=form_textarea(array('name' => 'comment', 'style' => 'width: 400px; display: block;'))?>
-		<?=form_hidden('media_id', $media['media_id'])?>
-		<br />
-		<input type="submit" value="Comment" />&nbsp;&nbsp;&nbsp;<a href="#" onClick="showHide(); return false;" style="color: red">cancel</a>
-		</form>
+		<?php
+		//check if user has made a comment in the past
+		$commented = false;
+		$currentUser = $this->session->userdata('user_id');
+		$theComment;
+		
+		foreach($comments as $comment)
+			if($currentUser == $comment['user_id'])
+			{
+				$commented = true;
+				$theComment = $comment;
+				break;
+			}
+		
+		if($commented):
+		?>
+			<h2>Comments (<?=sizeOf($comments)?>) &nbsp;&nbsp;<span style="font-size:60%;"><a href="#" onClick="showHide(); return false;">Edit Comment</a></span></h2>
+			<?=form_open('comment/edit', array('id' => 'comment_form', 'style' => 'display: none;'))?>
+			<br />
+			Rating: <?=form_dropdown('rating', array('1' => '1', '2' => '2', '3' => '3', '4' => '4', '5' => '5'), $theComment['rating'])?>
+			<br /><br />
+			<?=form_textarea(array('name' => 'comment', 'value' => $theComment['comment'], 'style' => 'width: 400px; display: block;'))?>
+			<?=form_hidden('media_id', $media['media_id'])?>
+			<br />
+			<input type="submit" value="Save changes" />&nbsp;&nbsp;&nbsp;<a href="#" onClick="showHide(); return false;" style="color: red">cancel</a>
+			</form>
+			
+		<?php else: ?>
+			
+			<h2>Comments (<?=sizeOf($comments)?>) &nbsp;&nbsp;<span style="font-size:60%;"><a href="#" onClick="showHide(); return false;">Write Comment</a></span></h2>
+			<?=form_open('comment', array('id' => 'comment_form', 'style' => 'display: none;'))?>
+			<br />
+			Rating: <?=form_dropdown('rating', array('1' => '1', '2' => '2', '3' => '3', '4' => '4', '5' => '5'))?>
+			<br /><br />
+			<?=form_textarea(array('name' => 'comment', 'style' => 'width: 400px; display: block;'))?>
+			<?=form_hidden('media_id', $media['media_id'])?>
+			<br />
+			<input type="submit" value="Comment" />&nbsp;&nbsp;&nbsp;<a href="#" onClick="showHide(); return false;" style="color: red">cancel</a>
+			</form>
+		<?php endif;?>
 		<br />
 		<div id="comments">
 			<?php foreach($comments as $comment): ?>
-			<h4><?=$comment['comment']?></h4>
-			<p><strong>Rating:</strong> <?=$comment['rating']?></p>
-			<p>Posted by <?=anchor('profile/'.$comment['user_id'], $comment['user_id'])?> at <?=date('g:i a', $comment['time_stamp'])?> on <?=date('M j, Y')?>.</p>
-			<br /><br />
+			<div class="<?php if($media['user_id'] == $comment['user_id']): ?>owner <?php endif; ?>comment">
+				<h4><?=$comment['comment']?></h4>
+				<p><strong>Rating:</strong> <?=$comment['rating']?></p>
+				<p>Posted by <?php if($this->session->userdata('user_id') != $comment['user_id']): ?><?=anchor('profile/'.$comment['user_id'], $comment['user_id'])?> <? else: ?>you <?php endif; ?>at <?=date('g:i a', $comment['time_stamp'])?> on <?=date('M j, Y')?>.</p>
+				<?php if($this->session->userdata('user_id') != $comment['user_id']): ?><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="editButton(); return false;">edit</a>&nbsp;&nbsp;<?=anchor('comment/delete/'.$media['media_id'], 'delete')?></p><?php endif; ?>
+			</div>
 			<?php endforeach; ?>
 		</div>
 		
