@@ -45,6 +45,11 @@ class Friend_model extends Query
 	{
 		return $this->query->getNumberOfFriends($uid);
 	}
+	
+	function areFriends($uid1, $uid2)
+	{
+		return $this->query->areFriends($uid1, $uid2);
+	}
 }
 
 ?>

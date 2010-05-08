@@ -1,3 +1,4 @@
+<?php $this->load->helper('friendship'); ?>
 <script>
 	$(document).ready(function(){
 		$(".selectors > a").click(function(event){
@@ -19,7 +20,12 @@
 <div id="booklist" class="type">
 	<?php if(sizeof($books) == 0) echo "No books"; ?>
 	<?php foreach($books as $book):?>
-		<p><strong><?=anchor('media/view/'.$book['media_id'], $book['title'])?></strong>
+		<p><?php $uid = $this->session->userdata('user_id');?>
+			<?php if (areFriends($uid, $book['user_id']) || $uid == $book['user_id']): ?>
+			<strong><?=anchor('media/view/'.$book['media_id'], $book['title'])?></strong>
+			<?php else: ?>
+			<strong><?=$book['title']?></strong>
+			<?php endif; ?>
 			<?php if($this->session->userdata('user_id') == $book['user_id']): ?>
 			 - <?=anchor('media/edit/'.$book['media_id'], 'edit')?>&nbsp;&nbsp;<?=anchor('media/delete/'.$book['media_id'], 'delete')?>
 			<?php else: ?>

@@ -80,7 +80,6 @@ class Query extends Model
 
 	function acceptFriendRequest($user_id1, $user_id2)
 	{
-		echo "BOOP";
 		return $this->db->simple_query("UPDATE FRIENDS
 				SET pending = \"false\"
 				WHERE user_id1 = \"$user_id1\"
@@ -389,6 +388,25 @@ class Query extends Model
 					FROM FRIENDS
 					WHERE pending = \"false\"
 					  AND user_id2 = \"$user_id\";");
+	}
+	
+	function areFriends($user1, $user2)
+	{
+		$table = $this->db->query("SELECT *
+					FROM FRIENDS
+					WHERE user_id1 = \"$user1\" AND user_id2 = \"$user2\" AND pending = 'false'
+					UNION
+					SELECT *
+					FROM FRIENDS
+					WHERE user_id1 = \"$user2\" AND user_id2 = \"$user1\" and pending = 'false';");
+		if ($table->num_rows() > 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 
 	function bestRatedMedia()
