@@ -101,5 +101,31 @@ class Friend extends MY_controller {
 			$this->load->view('confirmation', $data);
 		}
 	}
+	
+	function delete()
+	{
+		if($_POST == NULL)
+		{
+			$victim = $this->uri->segment(3);
+			$victim = $this->user_model->userData($victim);
+
+			$data['function'] = 'friend/delete';
+			$data['title'] = 'Delete Friend';
+			$data['message'] = 'Are you sure you want to delete your friendship with '.$victim['fname']. ' ' .$victim['lname']."?";
+			$data['id'] = $victim['user_id'];
+
+			$this->load->view('are_you_sure', $data);
+		}
+		else
+		{
+			$acceptor = $this->session->userdata('user_id');
+			$requestor = $this->user_model->userData($_POST['id']);
+			$this->friend_model->denyFriendRequest($_POST['id'], $acceptor);
+			$data['title'] = 'Friendship Rejected';
+			$data['message'] = 'Your friendship with '.$requestor['fname']. ' '.$requestor['lname']. 'has been rejected';
+			
+			$this->load->view('confirmation', $data);
+		}
+	}
 }
 ?>

@@ -232,8 +232,19 @@ class Query extends Model
 
 	function deleteFriend($user_id1, $user_id2)
 	{
-		return $this->db->simple_query("DELETE FROM FRIENDS
-					WHERE user_id1 = \"$user_id1\" AND user_id2 = \"$user_id2\";");
+		$table = $this->db->query("SELECT *
+					FROM FRIENDS
+					WHERE user_id1 = \"$user_id1\" AND user_id2 = \"$user_id2\" AND pending = 'false';");
+		if ($table->num_rows() > 0)
+		{
+			return $this->db->simple_query("DELETE FROM FRIENDS
+						WHERE user_id1 = \"$user_id1\" AND user_id2 = \"$user_id2\";");
+		}
+		else
+		{
+			return $this->db->simple_query("DELETE FROM FRIENDS
+						WHERE user_id1 = \"$user_id2\" AND user_id2 = \"$user_id1\";");
+		}
 	}
 
 	function deleteComment($user_id, $media_id)
