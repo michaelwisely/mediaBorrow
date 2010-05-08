@@ -48,7 +48,7 @@
 				<?php endforeach; ?>
 			</ul>
 		<?php endif; ?>
-		<?php if ( sizeof($borrowed_items['confirmed']) == 0 && sizeof($borrowed_items['confirmed']) == 0 ): ?>
+		<?php if ( sizeof($borrowed_items['confirmed']) == 0 && sizeof($borrowed_items['active']) == 0 ): ?>
 			<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nothing new here. </p>
 		<?php endif; ?>
 		<br>
