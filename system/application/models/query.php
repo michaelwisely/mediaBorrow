@@ -236,12 +236,11 @@ class Query extends Model
 					WHERE uid1 = \"$user_id1\" AND uid2 = \"$user_id2\";");
 	}
 
-	function deleteComment($user_id1, $media_id, $time_stamp)
+	function deleteComment($user_id, $media_id)
 	{
 		return $this->db->simple_query("DELETE FROM COMMENTS
-						WHERE user_id = \"$user_id\" 
-						AND media_id = \"$media_id\" 
-						AND time_stamp = \"$time_stamp\";");
+						WHERE user_id = \"$user_id\"
+						AND media_id = \"$media_id\";");
 	} 
 
 	function inviteNewUser($user_id, $new_user_email, $new_user_name)

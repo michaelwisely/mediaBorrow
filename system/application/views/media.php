@@ -118,7 +118,7 @@
 				<h4><?=$comment['comment']?></h4>
 				<p><strong>Rating:</strong> <?=$comment['rating']?></p>
 				<p>Posted by <?php if($this->session->userdata('user_id') != $comment['user_id']): ?><?=anchor('profile/'.$comment['user_id'], $comment['user_id'])?> <? else: ?>you <?php endif; ?>at <?=date('g:i a', $comment['time_stamp'])?> on <?=date('M j, Y')?>.</p>
-				<?php if($this->session->userdata('user_id') != $comment['user_id']): ?><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="editButton(); return false;">edit</a>&nbsp;&nbsp;<?=anchor('comment/delete/'.$media['media_id'], 'delete')?></p><?php endif; ?>
+				<?php if($this->session->userdata('user_id') == $comment['user_id']): ?><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="editButton(); return false;">edit</a>&nbsp;&nbsp;<?=anchor('comment/delete/'.$media['media_id'], 'delete')?></p><?php endif; ?>
 			</div>
 			<?php endforeach; ?>
 		</div>

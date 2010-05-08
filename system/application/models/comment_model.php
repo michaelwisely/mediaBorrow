@@ -27,6 +27,13 @@ class Comment_model extends Query
 		$this->query->editComment($user_id, $post['media_id'], $post['comment'], $post['rating']);
 	}
 	
+	function delete($media_id)
+	{
+		$user_id = $this->session->userdata('user_id');
+		
+		$this->query->deleteComment($user_id, $media_id);
+	}
+	
 	function getComments($media_id)
 	{
 		$commentsObject = $this->query->getComments($media_id);
