@@ -129,6 +129,15 @@ class User_model extends Query
 		
 		return array("books"=>$books, "movies"=>$movies, "cds"=>$cds);
 	}
+	
+	function edit($new)
+	{
+		$new['user_id'] = $this->currentUser();
+		$current = $this->userData($new['user_id']);
+		if($new['password'] == '')
+			$new['password'] = $current['password'];
+		$this->query->updateUserProfile($new['user_id'], $new['email'], $new['password'], $new['zip'], $new['fname'], $new['lname'], $new['year'], $new['month'], $new['day']);
+	}
 }
 
 ?>
