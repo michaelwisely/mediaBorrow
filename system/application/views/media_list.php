@@ -43,7 +43,12 @@
 <div id="movielist" class="type" style="display:none;">
 	<?php if(sizeof($movies) == 0) echo "No movies"; ?>
 	<?php foreach($movies as $movie):?>
-		<p><strong><?=anchor('media/view/'.$movie['media_id'], $movie['title'])?></strong>
+		<p><?php $uid = $this->session->userdata('user_id');?>
+			<?php if (areFriends($uid, $movie['user_id']) || $uid == $movie['user_id']): ?>
+			<strong><?=anchor('media/view/'.$movie['media_id'], $movie['title'])?></strong>
+			<?php else: ?>
+			<strong><?=$movie['title']?></strong>
+			<?php endif; ?>
 			<?php if($this->session->userdata('user_id') == $movie['user_id']): ?>
 			 - <?=anchor('media/edit/'.$movie['media_id'], 'edit')?>&nbsp;&nbsp;<?=anchor('media/delete/'.$movie['media_id'], 'delete')?>
 			<?php else: ?>
@@ -60,7 +65,12 @@
 <div id="cdlist" class="type" style="display:none;">
 	<?php if(sizeof($cds) == 0) echo "No CDs"; ?>
 	<?php foreach($cds as $cd):?>
-		<p><strong><?=anchor('media/view/'.$cd['media_id'], $cd['title'])?></strong>
+		<p><?php $uid = $this->session->userdata('user_id');?>
+			<?php if (areFriends($uid, $cd['user_id']) || $uid == $cd['user_id']): ?>
+			<strong><?=anchor('media/view/'.$cd['media_id'], $cd['title'])?></strong>
+			<?php else: ?>
+			<strong><?=$cd['title']?></strong>
+			<?php endif; ?>
 			<?php if($this->session->userdata('user_id') == $cd['user_id']): ?>
 			 - <?=anchor('media/edit/'.$cd['media_id'], 'edit')?>&nbsp;&nbsp;<?=anchor('media/delete/'.$cd['media_id'], 'delete')?>
 			<?php else: ?>
