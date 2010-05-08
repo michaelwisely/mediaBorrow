@@ -4,5 +4,4 @@
 	<h2 style='color:red'><?=$message?></h2>
 	<h3><?=anchor('', 'Return home')?></h3>
 </div>
-</body>
-</html>
+<?$this->load->view('footer')?>

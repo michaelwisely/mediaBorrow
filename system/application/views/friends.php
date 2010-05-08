@@ -10,5 +10,4 @@
 	<?php endforeach;?>
 	<br>
 </div>
-</body>
-</html>
+<?$this->load->view('footer')?>

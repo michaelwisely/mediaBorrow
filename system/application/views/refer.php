@@ -36,5 +36,4 @@
 		<?=form_hidden('user_id', $user_id)?>
 		</form>
 </div>
-</body>
-</html>
+<?$this->load->view('footer')?>

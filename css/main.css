@@ -41,7 +41,7 @@
 #sidebar {
   float: right;
   width: 200px;
-  padding: 8px 0 20px 6px;
+  padding: 8px 0 4px 6px;
   border-left: solid #444444 2px;
 }
 #main { width: 460px; }
@@ -86,3 +86,15 @@ form th {
   color: #ffffff;
 }
 .owner a { color: #dddddd; }
+.clear {
+  display: block;
+  padding-top: 20px;
+  clear: both;
+}
+#footer {
+  width: 700px;
+  margin: 0 auto;
+  border-top: solid #dddddd 2px;
+  padding-top: 8px;
+}
+#footer p { font-size: 75%; }

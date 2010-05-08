@@ -40,5 +40,4 @@
 	<h3>Please <?=anchor('login', 'login')?> as <?=$user_id?></h3>
 </div>
 
-</body>
-</html>
+<?$this->load->view('footer')?>

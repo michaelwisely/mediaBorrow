@@ -141,5 +141,4 @@ for($i = 1900; $i <= date('Y'); $i++)
 	</form>
 </div>
 
-</body>
-</html>
+<?$this->load->view('footer')?>

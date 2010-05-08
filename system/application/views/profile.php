@@ -20,5 +20,4 @@
 		<?=$this->load->view('media_list', array('profile' => true))?>
 	</div>
 </div>
-</body>
-</html>
+<?$this->load->view('footer')?>

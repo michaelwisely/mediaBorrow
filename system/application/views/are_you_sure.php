@@ -25,5 +25,4 @@
 	<?=form_hidden('id', $id)?>
 	<input type="submit" value="Yes" />&nbsp;&nbsp;&nbsp;<a href="<?=base_url()?>" style="color:red">cancel</a>
 </div>
-</body>
-</html>
+<?$this->load->view('footer')?>

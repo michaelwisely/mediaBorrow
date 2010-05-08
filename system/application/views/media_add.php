@@ -74,5 +74,4 @@
 	
 	</form>
 </div>
-</body>
-</html>
+<?$this->load->view('footer')?>
