@@ -54,6 +54,7 @@ $route['search/media'] = 'media/search';
 $route['account/edit'] = 'user/edit';
 $route['profile/(:any)'] = 'user/profile/$1';
 $route['profile'] = 'user/profile';
+$route['friends'] = 'friend';
 
 
 /* End of file routes.php */

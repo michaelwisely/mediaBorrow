@@ -72,10 +72,10 @@ class Query extends Model
 		return $temp;
 	}
 
-	function requestFrienship($user_id1, $user_id2)
+	function requestFriendship($user_id1, $user_id2)
 	{
 		return $this->db->simple_query("INSERT INTO FRIENDS
-					VALUES(\"$user_id1\", \"$user_id2\", true);");
+					VALUES(\"$user_id1\", \"$user_id2\", \"true\");");
 	}
 
 	function acceptFriendRequest($user_id1, $user_id2)

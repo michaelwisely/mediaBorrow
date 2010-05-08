@@ -25,6 +25,11 @@ class Friend_model extends Query
 		
 		return array("requests"=>$reqFriends, "friends"=>$curFriends);
 	}
+	
+	function requestFriend($uid1, $uid2)
+	{
+		return $this->query->requestFriendship($uid1, $uid2);
+	}
 }
 
 ?>
