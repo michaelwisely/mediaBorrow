@@ -80,10 +80,11 @@ class Query extends Model
 
 	function acceptFriendRequest($user_id1, $user_id2)
 	{
+		echo "BOOP";
 		return $this->db->simple_query("UPDATE FRIENDS
-				SET pending = false
-				WHERE uid1 = \"$user_id1\"
-					AND uid2 = \"$user_id2\";");
+				SET pending = \"false\"
+				WHERE user_id1 = \"$user_id1\"
+					AND user_id2 = \"$user_id2\";");
 	}
 
 	function getFriendRequests($user_id)
@@ -233,7 +234,7 @@ class Query extends Model
 	function deleteFriend($user_id1, $user_id2)
 	{
 		return $this->db->simple_query("DELETE FROM FRIENDS
-					WHERE uid1 = \"$user_id1\" AND uid2 = \"$user_id2\";");
+					WHERE user_id1 = \"$user_id1\" AND user_id2 = \"$user_id2\";");
 	}
 
 	function deleteComment($user_id, $media_id)

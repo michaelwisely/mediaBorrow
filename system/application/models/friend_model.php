@@ -30,6 +30,21 @@ class Friend_model extends Query
 	{
 		return $this->query->requestFriendship($uid1, $uid2);
 	}
+	
+	function acceptFriendRequest($uid1, $uid2)
+	{
+		return $this->query->acceptFriendRequest($uid1, $uid2);
+	}
+	
+	function denyFriendRequest($uid1, $uid2)
+	{
+		return $this->query->deleteFriend($uid1, $uid2);
+	}
+	
+	function numFriends($uid)
+	{
+		return $this->query->getNumberOfFriends($uid);
+	}
 }
 
 ?>

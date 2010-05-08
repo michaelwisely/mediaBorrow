@@ -16,6 +16,8 @@
 		<span id="right">
 			<?=anchor('profile', 'Profile')?>
 			&nbsp;&nbsp;&nbsp;
+			<?=anchor('friend', 'Friends')?>
+			&nbsp;&nbsp;&nbsp;
 			<?=anchor('account/edit', 'Account')?>
 			&nbsp;&nbsp;&nbsp;
 			<?=anchor('logout', 'Logout')?>
