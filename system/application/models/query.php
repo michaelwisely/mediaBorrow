@@ -325,8 +325,17 @@ class Query extends Model
 		$table = $this->db->query("SELECT m.title, m.type, b.status, b.start_date, m.user_id, m.media_id
 					FROM BORROWS b, MEDIA m
 					WHERE b.user_id = \"$user_id\"
-					  AND b.media_id = m.media_id;");
-		return $table->result_array();
+					  AND b.media_id = m.media_id
+					  AND b.status = 'confirmed';");
+		$data['confirmed'] = $table->result_array();
+		
+		$table = $this->db->query("SELECT m.title, m.type, b.status, b.start_date, m.user_id, m.media_id
+					FROM BORROWS b, MEDIA m
+					WHERE b.user_id = \"$user_id\"
+					  AND b.media_id = m.media_id
+					  AND b.status = 'active';");
+		$data['active'] = $table->result_array();
+		return $data;
 	}
 
 	function getItemsLentOutBy($user_id)

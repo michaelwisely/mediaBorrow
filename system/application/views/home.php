@@ -2,8 +2,8 @@
 
 <div id="container">
 	<div id="sidebar">
-		<h3> Borrow Requests </h3>
 		<?php if ( sizeof($borrow_requests) > 0 ): ?>
+		<h3> Borrow Requests </h3>
 			<ul>
 				<?php foreach($borrow_requests as $b_request):
 					$media_id = $b_request['media_id'];
@@ -15,14 +15,13 @@
 				<strong><?=anchor("borrow/denyRequest/$media_id/$b_id/$s_date", "DENY!", 'style="color:red"')?></strong><hr></p>
 				<?php endforeach; ?>
 			</ul>
-		<?php else: ?>
-			<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No new borrow requests! </p>
+			</br>
 		<?php endif; ?>
-		</br>
 		<h3> Stuff you have checked out </h3>
-		<?php if ( sizeof($borrowed_items) > 0 ): ?>
+		<?php if ( sizeof($borrowed_items['confirmed']) > 0 ): ?>
+			<h4>Confirmed:</h4>
 			<ul>
-				<?php foreach($borrowed_items as $b):
+				<?php foreach($borrowed_items['confirmed'] as $b):
 					$title= $b['title'];
 					$media_id = $b['media_id'];
 					$type = $b['type'];
@@ -33,8 +32,24 @@
 				<br>started <strong><?=date("F j, Y", $s_date)?></strong><hr></p>
 				<?php endforeach; ?>
 			</ul>
-		<?php else: ?>
-			<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No new borrow requests! </p>
+		<?php endif; ?>
+		<?php if ( sizeof($borrowed_items['active']) > 0 ): ?>
+			<h4>Active:</h4>
+			<ul>
+				<?php foreach($borrowed_items['active'] as $b):
+					$title= $b['title'];
+					$media_id = $b['media_id'];
+					$type = $b['type'];
+					$s_date = $b['start_date'];
+					$status = $b['title'];
+					$owner = $b['user_id'];?>
+				<p> <strong><?=anchor("/profile/$owner", $owner)?>'s</strong> <?=anchor("/media/view/$media_id", "$title ($type)")?>
+				<br>started <strong><?=date("F j, Y", $s_date)?></strong><hr></p>
+				<?php endforeach; ?>
+			</ul>
+		<?php endif; ?>
+		<?php if ( sizeof($borrowed_items['confirmed']) == 0 && sizeof($borrowed_items['confirmed']) == 0 ): ?>
+			<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nothing new here. </p>
 		<?php endif; ?>
 		<br>
 		<h3> Stuff you're lending </h3>
