@@ -1,4 +1,5 @@
 <?=$this->load->view('header')?>
+<?=$this->load->helper('friendship')?>
 <div id="container">
 	<?php if (sizeof($requests)>0): ?>
 		<h2>Friend Requests:</h2>
@@ -15,7 +16,8 @@
 	<?php if (sizeof($friends)>0): ?>
 		<?php foreach($friends as $friend):?>
 			<p>&nbsp;&nbsp;&nbsp;
-			<strong><?=anchor("/profile/$friend", $friend)?> </strong>
+			<?php $friendData = getFriendData($friend);?>
+			<strong><?=anchor("/profile/$friend", $friend)?> (<?= $friendData['fname'].' '.$friendData['lname'] ?>)</strong>
 		<?php endforeach;?>
 		<br>
 	<?php else: ?>
