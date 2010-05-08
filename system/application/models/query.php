@@ -234,7 +234,7 @@ class Query extends Model
 	{
 		$table = $this->db->query("SELECT *
 					FROM FRIENDS
-					WHERE user_id1 = \"$user_id1\" AND user_id2 = \"$user_id2\" AND pending = 'false';");
+					WHERE user_id1 = \"$user_id1\" AND user_id2 = \"$user_id2\";");
 		if ($table->num_rows() > 0)
 		{
 			return $this->db->simple_query("DELETE FROM FRIENDS
