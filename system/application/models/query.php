@@ -252,21 +252,45 @@ class Query extends Model
 							\"$new_user_name\");");
 	}
 	
-	function updateUserProfile($email, $password, $zip, $fname, $lname, $dob, $area)
+	function updateUserProfile($user_id, $email, $password, $zip, $fname, $lname, $year, $month, $day, $area = NULL)
 	{
-		if ($area != "NULL")
+		$zips = "SELECT zip FROM ZIPS WHERE zip = $zip";
+		$zips = $this->db->query($zips);
+		if($zips->num_rows() == 0)
 		{
-			$area = "\"$area\"";
+			$CI =& get_instance();
+			$CI->load->helper('location');
+			$cityState = zipCodeLookup($zip);
+			
+			$this->db->simple_query("INSERT INTO ZIPS
+						VALUES($zip, '".$cityState['city']."', '".$cityState['state']."')");
 		}
-		return $this->db->simple_query("UPDATE USERS
-					SET email = \"$email\",
-					    password =\"$password\",
-					    zip = $zip,
-					    fname = \"$fname\",
-					    lname = \"$lname\",
-					    dob = \"$dob\",
-					    area = $area
-					WHERE user_id = \"$user_id\";");
+		
+		$email = strtolower($email);
+		$dob = "$year-$month-$day";
+		if($area == NULL)
+		{
+			return $this->db->query("UPDATE USERS
+						SET email = \"$email\",
+						    password =\"$password\",
+						    zip = $zip,
+						    fname = \"$fname\",
+						    lname = \"$lname\",
+						    dob = \"$dob\"
+						WHERE user_id = \"$user_id\";");
+		}
+		else
+		{
+			return $this->db->query("UPDATE USERS
+						SET email = \"$email\",
+						    password =\"$password\",
+						    zip = $zip,
+						    fname = \"$fname\",
+						    lname = \"$lname\",
+						    dob = \"$dob\",
+						    area = \"$area\"
+						WHERE user_id = \"$user_id\";");
+		}
 	} 
  
 	function makeSiteSuggestion($user_id, $topic, $suggestion)

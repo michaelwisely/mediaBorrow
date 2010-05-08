@@ -174,6 +174,25 @@ class User extends Controller {
 			}
 		}
 	}
+	
+	function edit()
+	{
+		if($_POST == NULL)
+		{
+			$data['title'] = 'Edit Accout Details';
+			$data['userData']  = $this->user_model->userData($this->session->userdata('user_id'));
+			
+			$this->load->view('account', $data);
+		}
+		else
+		{
+			$this->user_model->edit($_POST);
+			
+			$data['title'] = 'Information Updated';
+			$data['message'] = 'Your Information has been updated';
+			$this->load->view('confirmation', $data);
+		}
+	}
 }
 
 
