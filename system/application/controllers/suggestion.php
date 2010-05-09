@@ -1,10 +1,10 @@
 <?php
 /*****************************************************************************
- *  Suggestion.php
+ *  suggestion.php
  *  
  *  Contains methods which correspond to webpages that are responsible for
  *  modifying information regarding user site suggestions. This class inherits
- *  from a MY_Controller, which verifies that mediaBorrow is installed and
+ *  from MY_Controller, which verifies that mediaBorrow is installed and
  *  the user is logged in. The following pages are included:
  *
  *  __construct -- constructor, loads suggestion model

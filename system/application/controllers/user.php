@@ -1,6 +1,6 @@
 <?php
 /*****************************************************************************
- *  User.php
+ *  user.php
  *  
  *  Contains methods which correspond to webpages that are responsible for
  *  modifying information regarding users. The following pages are included:

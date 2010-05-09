@@ -1,5 +1,21 @@
 <?php
-
+/*****************************************************************************
+ *  borrow.php
+ *  
+ *  Contains methods which correspond to webpages that are responsible for
+ *  modifying information regarding user borrows. This class inherits
+ *  from MY_Controller, which verifies that mediaBorrow is installed and
+ *  the user is logged in. The following pages are included:
+ *
+ *  __construct -- constructor, loads media model and borrow model
+ *  request -- allows users to make a request to borrow an item. loads a confirmation page
+ *  confirmRequest -- allows users to confirm a request to borrow an item. loads a confirmation page
+ *  denyRequest -- allows users to refuse a request to borrow an item. loads a confirmation page
+ *  request -- allows users to make a request to borrow an item. loads a confirmation page
+ *  handItOver -- allows a user to transfer posession of an item to another user. loads a confirmation page
+ *  returnItem -- allows a user to regain posession of an item from another user. loads a confirmation page
+ *
+ ****************************************************************************/
 class Borrow extends MY_controller {
 
 	function __construct()

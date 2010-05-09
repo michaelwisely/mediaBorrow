@@ -1,4 +1,20 @@
 <?php
+/*****************************************************************************
+ *  friend.php
+ *  
+ *  Contains methods which correspond to webpages that are responsible for
+ *  modifying information regarding friendships. This class inherits
+ *  from MY_Controller, which verifies that mediaBorrow is installed and
+ *  the user is logged in. The following pages are included:
+ *
+ *  __construct -- constructor, loads friend model
+ *  index -- prepares a page to list all friends of a user pending and current
+ *  request -- prepares a page allowing a user to request another user to be friends. adds pending friendship to database
+ *  confirm -- prepares a page which allows a user to confirm a friendship, and changes pending friendship to non-pending
+ *  reject -- prepares a page which allows a user to refuse a friendship, and removes the friendship from the db on confirmation
+ *  delete -- prepares a page allowing users to delete existing non-pending friendships from the database
+ *
+ ****************************************************************************/
 
 class Friend extends MY_controller {
 

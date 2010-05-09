@@ -1,5 +1,18 @@
 <?php
-
+/*****************************************************************************
+ *  comment.php
+ *  
+ *  Contains methods which correspond to webpages that are responsible for
+ *  modifying information regarding comments on user media. This class inherits
+ *  from MY_Controller, which verifies that mediaBorrow is installed and
+ *  the user is logged in. The following pages are included:
+ *
+ *  __construct -- constructor, loads comment model
+ *  index -- allows users to make a comment
+ *  edit -- allows users to edit their comment on a piece of media
+ *  delete -- allows users to delete their comment from a piece of media
+ *
+ ****************************************************************************/
 class comment extends MY_controller {
 
 	function __construct()

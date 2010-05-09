@@ -1,5 +1,14 @@
 <?php
-
+/*****************************************************************************
+ *  install.php
+ *  
+ *  Contains methods which correspond to webpages that are responsible for
+ *  installing the mediaBorrow system. The following pages are included:
+ *
+ *  Install -- constructor, calls parent constructor
+ *  do_install -- gathers user information necessary to perform system install
+ *
+ ****************************************************************************/
 class Install extends Controller {
 
 	function Install()

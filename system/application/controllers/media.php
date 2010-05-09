@@ -1,4 +1,21 @@
 <?php
+/*****************************************************************************
+ *  media.php
+ *  
+ *  Contains methods which correspond to webpages that are responsible for
+ *  modifying information regarding user media. This class inherits
+ *  from MY_Controller, which verifies that mediaBorrow is installed and
+ *  the user is logged in. The following pages are included:
+ *
+ *  __construct -- constructor, loads media model
+ *  index -- redirects user to their home page.
+ *  search -- prepares the page which is loaded when users do a search for media
+ *  add -- prepares the page which users use to add media to their libraries
+ *  edit -- prepares the page which users use to edit media in their libraries
+ *  delete -- prepares the page which users use to delete media from their libraries
+ *  view -- prepares the page which users use to view any media and make comments (loads comment model)
+ *
+ ****************************************************************************/
 
 class Media extends MY_controller {
 
