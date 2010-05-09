@@ -1,3 +1,10 @@
+<?php /*****************************************************************************
+ *  search_results.php
+ *  
+ *  Displays search resuts by calling the medialist view. Called by Media Controller.
+ *
+ ****************************************************************************/?>
+
 <?=$this->load->view('header')?>
 <div id="container">
 	<div id="main">

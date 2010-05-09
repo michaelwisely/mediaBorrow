@@ -1,3 +1,10 @@
+
+<?php /*************************************************************************
+ *  are_you_sure.php
+ *  
+ *  This view allows users to confirm or cancel an action which corresponds to $function
+ *
+ ****************************************************************************/ ?>
 <?=$this->load->view('header')?>
 
 <script>

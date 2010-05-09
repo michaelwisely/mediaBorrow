@@ -1,3 +1,10 @@
+<?php /*****************************************************************************
+ *  media.php
+ *  
+ *  This view shows details for a single piece of media. Called by Media controller.
+ *
+ ****************************************************************************/?>
+
 <?=$this->load->view('header')?>
 
 <script type="text/javascript" src="<?=base_url().'js/jquery.scrollTo.js'?>"></script>

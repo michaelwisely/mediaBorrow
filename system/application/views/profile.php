@@ -1,3 +1,9 @@
+<?php /*****************************************************************************
+ *  profile.php
+ *  
+ *  This view displays a user's profile. Loaded by User controller
+ *
+ ****************************************************************************/?>
 <?=$this->load->view('header')?>
 <div id="container">
 	<div id="sidebar">

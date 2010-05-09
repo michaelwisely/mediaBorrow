@@ -1,3 +1,10 @@
+<?php /*****************************************************************************
+ *  failed.php
+ *  
+ *  Infoms a user when they make illegal actions regarding borrows. Called by
+ *  Borrow controller.
+ *
+ ****************************************************************************/?>
 <?=$this->load->view('header')?>
 <div id="container">
 	<h1>D'oh!</h1>

@@ -1,3 +1,11 @@
+<?php /*****************************************************************************
+ *  media_list.php
+ *  
+ *  Lists media according to the type. This view is used by the User controller
+ *  for the user's home page and profile, it is also used for the search page.
+ *
+ ****************************************************************************/?>
+
 <?php $this->load->helper('friendship'); ?>
 <script>
 	$(document).ready(function(){

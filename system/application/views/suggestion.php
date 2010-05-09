@@ -1,3 +1,10 @@
+<?php /*****************************************************************************
+ *  suggestion.php
+ *  
+ *  allows users to submit suggestions to site adimistrators. 
+ *
+ ****************************************************************************/?>
+
 <?=$this->load->view('header')?>
 <script>
 	$(document).ready(function(){

@@ -1,3 +1,10 @@
+<?php /*****************************************************************************
+ *  footer.php
+ *  
+ *  This is the footer displayed on all pages. has links and developer names.
+ *
+ ****************************************************************************/?>
+
 <div class="clear"></div>
 <div id="footer">
 	<?php if($this->session->userdata('logged_in')): ?>

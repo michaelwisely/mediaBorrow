@@ -1,4 +1,12 @@
 <?php
+/*****************************************************************************
+ *  install.php
+ *  
+ *  Shows the install page. Allows users to input their information so that when
+ *  the system is installed, that user will already be in the database.
+ *
+ ****************************************************************************/
+
 $months = array(
 			'01' => 'Jan',
 			'02' => 'Feb',

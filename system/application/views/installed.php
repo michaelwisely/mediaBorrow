@@ -1,3 +1,11 @@
+<?php/*****************************************************************************
+ *  installed.php
+ *  
+ *  A confirmation page for the first user who installs the system. Also sends
+ *  back information to the install controller for the installation.
+ *
+ ****************************************************************************/?>
+
 <head>
 	<title>Installation Complete</title>
 	

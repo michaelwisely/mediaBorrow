@@ -1,3 +1,11 @@
+<?php /*****************************************************************************
+ *  signed_up.php
+ *  
+ *  confirmation page for a user who has just signed up. sends information back
+ *  to User controller to add infomation to the database.
+ *
+ ****************************************************************************/?>
+
 <html>
 
 <head>

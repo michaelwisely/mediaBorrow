@@ -1,3 +1,10 @@
+<?php /*****************************************************************************
+ *  refer.php
+ *  
+ *  Allows users to refer non-users to the sustem. Loaded by Refers controller
+ *
+ ****************************************************************************/?>
+
 <?=$this->load->view('header')?>
 
 <script>

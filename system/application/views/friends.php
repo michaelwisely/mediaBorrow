@@ -1,3 +1,10 @@
+<?php /*****************************************************************************
+ *  friends.php
+ *  
+ *  Displays a list of friend requests as well as current friends. Called by
+ *  Friend controller and accessed by Friends link in the page header.
+ *
+ ****************************************************************************/ ?>
 <?=$this->load->view('header')?>
 <?=$this->load->helper('friendship')?>
 <div id="container">

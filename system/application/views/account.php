@@ -1,4 +1,10 @@
 <?php
+/*****************************************************************************
+ *  account.php
+ *  
+ *  Allows users to edit their account information. Loaded by User controller
+ *
+ ****************************************************************************/
 $months = array(
 			'01' => 'Jan',
 			'02' => 'Feb',

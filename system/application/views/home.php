@@ -1,3 +1,10 @@
+<?php /*****************************************************************************
+ *  home.php
+ *  
+ *  This is the index page users see when they first log in. It displays current
+ *  borrow information as well as the user's library.
+ *
+ ****************************************************************************/?>
 <?=$this->load->view('header', array('profile' => false))?>
 
 <div id="container">

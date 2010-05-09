@@ -1,3 +1,11 @@
+<?php /*****************************************************************************
+ *  borrow_confirm.php
+ *  
+ *  Similar to are_you_sure.php and allows users to confirm or cancel an action
+ *  which is related to borrowing.
+ *
+ ****************************************************************************/?>
+
 <?=$this->load->view('header')?>
 
 <script>

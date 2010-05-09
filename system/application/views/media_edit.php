@@ -1,3 +1,10 @@
+<?php /*****************************************************************************
+ *  media_edit.php
+ *  
+ *  Allows users to edit information for a piece of media Loaded by Media controller
+ *
+ ****************************************************************************/?>
+
 <?=$this->load->view('header')?>
 <script>
 	$(document).ready(function(){

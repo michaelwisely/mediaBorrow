@@ -1,3 +1,11 @@
+<?php /*****************************************************************************
+ *  media_add.php
+ *  
+ *  This is the view which users see when adding media to their library.
+ *  Called by the Media Controller
+ *
+ ****************************************************************************/?>
+
 <?=$this->load->view('header')?>
 <script>
 	function typeChange()

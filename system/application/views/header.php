@@ -1,3 +1,10 @@
+<?php /*****************************************************************************
+ *  header.php
+ *  
+ *  This view is for the header on a webpage. it has the home links and other
+ *  useful links for users (and the search bar.)
+ *
+ ****************************************************************************/?>
 <html>
 <head>
 	<title><?=$title?></title>
