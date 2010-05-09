@@ -14,7 +14,7 @@
 * currentUser - gets the userID of the user currently logged in
 * userData - gets user information based on the given user_id
 * getLibraryInformation - gets a user's library
-* edt - changes a user's account information
+* edit - changes a user's account information
 ****************************************************************************/
 class User_model extends Query
 {
