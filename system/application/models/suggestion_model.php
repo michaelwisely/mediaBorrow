@@ -1,5 +1,14 @@
 <?php
-
+/*****************************************************************************
+* suggestion_model.php
+*
+* Contains methods which are used by controllers to access information regarding
+* site suggestions. This class inherits from a Query class, which contains SQL queries
+* which are necessary for suggestion functions:
+* 
+* Suggestion_model - constructor which calls the constructor of the Query class
+* suggest - lets user make a suggestion
+****************************************************************************/
 class Suggestion_model extends Query
 {
 	function Suggestion_model()

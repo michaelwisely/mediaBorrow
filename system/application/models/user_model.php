@@ -1,5 +1,21 @@
 <?php
-
+/*****************************************************************************
+* user_model.php
+*
+* Contains methods which are used by controllers to access information regarding
+* users. This class inherits from a Query class, which contains SQL queries
+* which are necessary for user functions:
+* 
+* User_model - constructor, calls Query constructor
+* login - logs a user into the system using code igniter's session functions
+* logout - logs a user out using code igniter's functions
+* user_exists - checks to see if a user exists in the system
+* email_exists - checks to see if an email exists in the system
+* currentUser - gets the userID of the user currently logged in
+* userData - gets user information based on the given user_id
+* getLibraryInformation - gets a user's library
+* edt - changes a user's account information
+****************************************************************************/
 class User_model extends Query
 {
 	function User_model()

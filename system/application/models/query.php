@@ -1,5 +1,10 @@
 <?php
-
+/*****************************************************************************
+* query.php
+*
+* Contains all the queries that are necessary for the database. This class is a superclass
+* from which the other models inherit.
+****************************************************************************/
 class Query extends Model
 {
 	function Query()

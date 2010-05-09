@@ -1,5 +1,18 @@
 <?php
-
+/*****************************************************************************
+* media_model.php
+*
+* Contains methods which are used by controllers to access information regarding
+* media. This class inherits from a Query class, which contains SQL queries
+* which are necessary for media functions:
+*
+* Media_model - constructor that calls the constructor for the Query class
+* add - lets user add some media to his or her library
+* search - lets user search for a piece of media
+* modify_media - lets user modify one of their media
+* delete - lets user delete a selected media
+* mediaData - returns the data for the appropriate media
+****************************************************************************/
 Class Media_model extends Query
 {
 	function Media_model()

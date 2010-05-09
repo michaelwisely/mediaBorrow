@@ -1,5 +1,17 @@
 <?php
-
+/*****************************************************************************
+* comment_model.php
+*
+* Contains methods which are used by controllers to access information regarding
+* user comments. This class inherits from a Query class, which contains SQL queries
+* which are necessary for commenting functions:
+*
+* Comment model - constructor that calls the constructor for the Query class
+* add - adds the comment to the specified media
+* edit - edits the user's comment for the specified media
+* delete - deletes the user's comment for the specified media
+* getComments = gets the comments for a specified media.
+****************************************************************************/
 class Comment_model extends Query
 {
 	function Comment_model()

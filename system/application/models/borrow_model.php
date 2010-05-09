@@ -1,5 +1,29 @@
 <?php
-
+/*****************************************************************************
+* borrow_model.php
+*
+* Contains methods which are used by controllers to access information regarding
+* user borrows. This class inherits from a Query class, which contains SQL queries
+* which are necessary for borrowing functions:
+*
+* borrow model - constructor that calls the constructor for the Query class
+* requestBorrow - requests to borrow the specified media
+* isRequested - confirms that the media has been requested
+* getBorrowItemsBorrowedBy - gets the items that are borrowed by the specified
+* user
+* getBorrowRequests - gets the users items that are being requested of to 
+* borrow
+* getLends - gets the items that the user has lent out
+* isCheckedOut - says whether or not a specified item is currently being
+* borrowed by a user
+* lendItem - "lends" the item to the person requesting to borrow that item
+* returnItem - Returns the media back to the owner
+* approveBorrow - confirms that the owner of an item is going to let the 
+* person requesting to borrow the item borrow the item.
+* refuseBorrow - confirms that the owner of an item is NOT going to let the 
+* person requesting to borrow the item borrow the item.
+* 
+****************************************************************************/
 class Borrow_model extends Query
 {
 	function Borrow_model()

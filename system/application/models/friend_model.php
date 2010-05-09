@@ -1,5 +1,18 @@
 <?php
-
+/*****************************************************************************
+* friend_model.php
+*
+* Contains methods which are used by controllers to access information regarding
+* friendships. This class inherits from a Query class, which contains SQL queries
+* which are necessary for friend functions:
+*
+* Friend_model - constructor that calls the constructor for the Query class
+* requestFriend - lets user make a friend request
+* acceptFriendRequest - lets user accept a friend request
+* denyFriendRequest - lets user deny a friend request
+* numFriends - returns how many friends a user has
+* areFriends - says whether or not two users are friends 
+****************************************************************************/
 class Friend_model extends Query
 {
 	function Friend_model()
