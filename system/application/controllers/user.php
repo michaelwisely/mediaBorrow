@@ -1,5 +1,19 @@
 <?php
-
+/*****************************************************************************
+ *  User.php
+ *  
+ *  Contains methods which correspond to webpages that are responsible for
+ *  modifying information regarding users. The following pages are included:
+ *
+ *  User -- constructor, loads user model
+ *  Profile -- prepares the user profile
+ *  Index -- prepares the user homepage to show borrow status
+ *  Login -- prepares the page which users use to log in
+ *  Logout -- logs the user out of the system and sends them home
+ *  Signup -- sends the user to a sign-up page and adds them to the database when they're done
+ *  Edit -- allows users to edit their account information
+ *
+ ****************************************************************************/
 class User extends Controller {
 
 	function User()
