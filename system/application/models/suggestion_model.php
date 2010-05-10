@@ -20,7 +20,12 @@ class Suggestion_model extends Query
 	{
 		parent::Query();
 	}
-	
+	/*******************************************************************
+	 * suggest-- adds a suggestion to the suggestions table
+	 * @pre - none
+	 * @param - $post is an array ($_POST) with keys 'topic' and 'suggestion'
+	 * @post - a new suggestion has been added to the database
+	*******************************************************************/
 	function suggest($post)
 	{
 		$CI =& get_instance();
