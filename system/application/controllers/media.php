@@ -18,19 +18,32 @@
  ****************************************************************************/
 
 class Media extends MY_controller {
-
+	/*******************************************************************
+	 * __constructor -- constructor for the Media class
+	 * @pre - none
+	 * @post - calls the parent constructor and loads the media model.
+	*******************************************************************/
 	function __construct()
 	{
 		parent::__construct();
 		
 		$this->load->model('media_model');
 	}
-	
+	/*******************************************************************
+	 * index -- loads the default media view
+	 * @pre - user is logged in
+	 * @post - redirects user home
+	*******************************************************************/
 	function index()
 	{
 		redirect('');
 	}
-	
+	/*******************************************************************
+	 * search -- loads the search result page
+	 * @pre - user is logged in
+	 * @post - gets the media data matching the search (everything if NULL)
+	 * 	and loads up the search view with the data
+	*******************************************************************/
 	function search()
 	{
 		if($_POST == NULL)
@@ -68,7 +81,13 @@ class Media extends MY_controller {
 		
 		$this->load->view('search_results', $data);
 	}
-	
+	/*******************************************************************
+	 * add -- adds media to the user's library
+	 * @pre - user is logged in.
+	 * @post - loads a view for the user to put in information about their
+	 * 	media, then after they submit, a the information is added to
+	 * 	the database and a confirmation view is loaded.
+	*******************************************************************/
 	function add()
 	{
 		if($_POST == NULL)
@@ -85,7 +104,14 @@ class Media extends MY_controller {
 			$this->load->view('confirmation', $data);
 		}
 	}
-	
+	/*******************************************************************
+	 * edit -- allows users to edit information about their media
+	 * @pre - user is logged in and media exists, segment 3 of the URL
+	 * 	must be the id of the media
+	 * @post - initially, the media_edit view is loaded and pre-populated
+	 * 	with the old information about the media. after changes are
+	 * 	submitted, the confirmation view is loaded.
+	*******************************************************************/
 	function edit()
 	{
 		if($_POST == NULL)
@@ -104,7 +130,14 @@ class Media extends MY_controller {
 			$this->load->view('confirmation', $data);
 		}
 	}
-	
+	/*******************************************************************
+	 * delete -- deletes a media item from the system
+	 * @pre - user is logged in, media exists, segment 3 of the URL
+	 * 	is the media_id to be deleted
+	 * @post - initially user is presented with the are_you_sure view.
+	 * 	If they choose to say yes, the media is deleted and a confirmation
+	 * 	view is loaded.
+	*******************************************************************/
 	function delete()
 	{
 		if($_POST == NULL)
@@ -126,7 +159,13 @@ class Media extends MY_controller {
 			$this->load->view('confirmation', $data);
 		}
 	}
-	
+	/*******************************************************************
+	 * view -- loads up a view for the media item
+	 * @pre - media exists and media id is in URL segment 3, and user is
+	 * 	logged in.
+	 * @post - media information and comments on the media are loaded
+	 * 	and the media view is loaded with that information.
+	*******************************************************************/
 	function view()
 	{
 		$this->load->model('comment_model');

@@ -14,14 +14,22 @@
  *
  ****************************************************************************/
 class comment extends MY_controller {
-
+	/*******************************************************************
+	 * __constructor -- constructor for the comment class
+	 * @pre - none
+	 * @post - calls parent constructor and loads comment model
+	*******************************************************************/
 	function __construct()
 	{
 		parent::__construct();
 		
 		$this->load->model('comment_model');
 	}
-	
+	/*******************************************************************
+	 * index -- prepares page to view media and add comments
+	 * @pre - user is logged in
+	 * @post - redirects to media view after comment is added
+	*******************************************************************/
 	function index()
 	{
 		if($_POST == NULL)
@@ -33,7 +41,11 @@ class comment extends MY_controller {
 			redirect('media/view/'.$_POST['media_id']);
 		}
 	}
-	
+	/*******************************************************************
+	 * edit -- prepares page to view media and edit comments
+	 * @pre - user is logged in
+	 * @post - redirects to media view after comment is edited
+	*******************************************************************/
 	function edit()
 	{
 		if($_POST == NULL)
@@ -45,7 +57,14 @@ class comment extends MY_controller {
 			redirect('media/view/'.$_POST['media_id']);
 		}
 	}
-	
+	/*******************************************************************
+	 * index -- prepares page to delete comments
+	 * @pre - user is logged in, URL segment 3 is the media_id which
+	 * 	the comment is tied to
+	 * @post - if the user clicks yes on the are_you_sure page, the
+	 * 	comment is removed from the database and a confirmation
+	 * 	view is loaded.
+	*******************************************************************/
 	function delete()
 	{
 		if($_POST == NULL)

@@ -15,7 +15,12 @@
  *
  ****************************************************************************/
 class User extends Controller {
-
+	/*******************************************************************
+	 * User -- constructor for the User class
+	 * @pre - none
+	 * @post - if mediaBorrow isn't installed, redirects to install page
+	 * 	otherwise, loads user model.
+	*******************************************************************/
 	function User()
 	{
 		parent::Controller();
@@ -27,7 +32,14 @@ class User extends Controller {
 		
 		$this->load->model('user_model');
 	}
-	
+	/*******************************************************************
+	 * profile -- user profile page
+	 * @pre - user is logged in.
+	 * 	segment 3 of the url is the user_id of the person whose
+	 * 	profile is being viewed. otherwise load the current user's profile
+	 * @post - the 'profile' view is loaded with the data correstponding
+	 * 	to the userid in segment 3
+	*******************************************************************/
 	function profile()
 	{
 		if(!$this->session->userdata('logged_in'))
@@ -68,7 +80,14 @@ class User extends Controller {
 			$this->load->view('profile', $data);
 		}
 	}
-	
+	/*******************************************************************
+	 * index -- user home page
+	 * @pre - none.
+	 * @post - if user isn't logged in, the welcome view is loaded
+	 * 	if the user is logged in, information on their library and
+	 * 	borrow requests is pulled from friend and borrow model
+	 * 	and sent to be displayed in the home view
+	*******************************************************************/
 	function index()
 	{	
 		if(!$this->session->userdata('logged_in'))
@@ -116,7 +135,13 @@ class User extends Controller {
 			$this->load->view('home', $data);
 		}
 	}
-	
+	/*******************************************************************
+	 * login -- login page
+	 * @pre - none
+	 * @post - if user login credentials are correct, the user is logged in
+	 * 	and send to the index. Otherwise, an error message is presented
+	 * 	and this page is loaded again.
+	*******************************************************************/
 	function login()
 	{
 		if($_POST == NULL)
@@ -137,14 +162,23 @@ class User extends Controller {
 			}
 		}
 	}
-	
+	/*******************************************************************
+	 * logout -- logs out a user
+	 * @pre - none
+	 * @post - logs out the user and redirects them to the welcome screen.
+	*******************************************************************/
 	function logout()
 	{
 		$this->user_model->logout();
 		
 		redirect('');
 	}
-	
+	/*******************************************************************
+	 * signup -- the page used for new user signup
+	 * @pre - none
+	 * @post - if the user inserts correct data, they are added to the database
+	 * 	otherwise they are asked to reenter information.
+	*******************************************************************/
 	function signup()
 	{
 		if($_POST == NULL)
@@ -188,7 +222,12 @@ class User extends Controller {
 			}
 		}
 	}
-	
+	/*******************************************************************
+	 * edit -- account page
+	 * @pre - the user is logged in
+	 * @post - account view is loaded and information entered is modified
+	 * 	in the database, then the confirmation view is loaded.
+	*******************************************************************/
 	function edit()
 	{
 		if($_POST == NULL)

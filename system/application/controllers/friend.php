@@ -17,14 +17,22 @@
  ****************************************************************************/
 
 class Friend extends MY_controller {
-
+	/*******************************************************************
+	 * __construct -- constructor for the Friend class
+	 * @pre - none
+	 * @post - calls parent constructor and loads friend model.
+	*******************************************************************/
 	function __construct()
 	{
 		parent::__construct();
 
 		$this->load->model('friend_model');
 	}
-
+	/*******************************************************************
+	 * index -- prepares the page which lists all user friends
+	 * @pre - user is logged in.
+	 * @post - a page which lists all of the user's friends is loaded.
+	*******************************************************************/
 	function index()
 	{
 		$user_id = $this->user_model->currentUser();
@@ -35,7 +43,13 @@ class Friend extends MY_controller {
 		$data['title'] = $userInfo['fname'];
 		$this->load->view('friends', $data);
 	}
-
+	/*******************************************************************
+	 * request -- verifies user friend request 
+	 * @pre - user is logged in, segment 3 of the URL is ID of the friend
+	 * 	being requested
+	 * @post - the are_you_sure page is loaded initially, and if user chooses
+	 * 	yes, the request is recorded and a confirmation view is loaded.
+	*******************************************************************/
 	function request()
 	{
 		if($_POST == NULL)
@@ -63,7 +77,13 @@ class Friend extends MY_controller {
 			$this->load->view('confirmation', $data);
 		}
 	}
-
+	/*******************************************************************
+	 * confirm -- confirms a friend request
+	 * @pre - user is logged in, friend's user ID is segment 3 of the URL
+	 * @post - if the user clicks yes on the are_you_sure view, a confirmation
+	 * 	page is loaded and the friendship is changed from pending
+	 * 	to not pending
+	*******************************************************************/
 	function confirm()
 	{
 		if($_POST == NULL)
@@ -91,7 +111,12 @@ class Friend extends MY_controller {
 			$this->load->view('confirmation', $data);
 		}
 	}
-
+	/*******************************************************************
+	 * reject -- rejects a friend request
+	 * @pre - user is logged in, friend's user ID is segment 3 of the URL
+	 * @post - if the user clicks yes on the are_you_sure view, a confirmation
+	 * 	page is loaded and the friendship is deleted
+	*******************************************************************/
 	function reject()
 	{
 		if($_POST == NULL)
@@ -117,7 +142,14 @@ class Friend extends MY_controller {
 			$this->load->view('confirmation', $data);
 		}
 	}
-	
+	/*******************************************************************
+	 * delete -- deletes a non-pending friendship
+	 * @pre - user is logged in and friend to be removed is URL segment 3
+	 * 	and user and friend are already non-pending friends
+	 * @post - if the user chooses to click yes on the are_you_sure page
+	 * 	the frienship is deleted from the database and a confirmation
+	 * 	view is loaded.
+	*******************************************************************/
 	function delete()
 	{
 		if($_POST == NULL)

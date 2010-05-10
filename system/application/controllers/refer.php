@@ -13,11 +13,22 @@
  ****************************************************************************/
 class Refer extends MY_Controller
 {
+	/*******************************************************************
+	 * __construct -- constructor for the Refer class
+	 * @pre - none
+	 * @post - calls the parent constructor.
+	*******************************************************************/
 	function __construct()
 	{
 		parent::__construct();
 	}
-	
+	/*******************************************************************
+	 * index -- prepares the page for making referrals to the site.
+	 * @pre - user is logged in
+	 * @post - initially users are taken to the refer view, then after
+	 * 	submitting, their information is prepared to be sent by email
+	 * 	(which doesn't work) and a confirmation view is loaded.
+	*******************************************************************/
 	function index()
 	{
 		if($_POST == NULL)
@@ -36,7 +47,7 @@ class Refer extends MY_Controller
 				//send an email to the invitee
 				$sender = $this->user_model->userData($_POST['user_id']);
 				$sender = $sender['fname'].' '.$sender['lname'];
-				$email = 'You have been invited to <a href="http://r01mwwcp2.device.mst.edu">MediaBorrow</a> by'.$sender.'.<br />It will be fun.';
+				$email = 'You have been invited to <a href="http://www.mediaBorrow.com">MediaBorrow</a> by'.$sender.'.<br />It will be fun.';
 				
 				$this->load->helper('email');
 				send_email($_POST['email'], 'You\'ve been invited to MediaBorrow!', $email);

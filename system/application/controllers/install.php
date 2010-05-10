@@ -10,12 +10,21 @@
  *
  ****************************************************************************/
 class Install extends Controller {
-
+	/*******************************************************************
+	 * Install -- constructor for the Install class
+	 * @pre - none
+	 * @post - calls parent constructor.
+	*******************************************************************/
 	function Install()
 	{
 		parent::Controller();
 	}
-	
+	/*******************************************************************
+	 * index -- loads install page
+	 * @pre - none
+	 * @post - if the database is installed, send an error message,
+	 * 	otherwise redirect to install page.
+	*******************************************************************/
 	function index()
 	{
 		$query = 'SHOW TABLES';
@@ -27,7 +36,12 @@ class Install extends Controller {
 			$this->load->view('install');
 		
 	}
-	
+	/*******************************************************************
+	 * do_install -- gets new user information and performs install
+	 * @pre - database mediaborrow exists and is empty
+	 * @post - takes user information and performs install, then loads
+	 *	an install confirmation page.
+	*******************************************************************/
 	function do_install()
 	{
 		if($_POST == NULL)
