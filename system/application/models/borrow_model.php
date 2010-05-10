@@ -26,6 +26,11 @@
 ****************************************************************************/
 class Borrow_model extends Query
 {
+	/*******************************************************************
+	 * Borrow_model -- constructor for the Borrow_model class
+	 * @pre - none
+	 * @post - none
+	*******************************************************************/
 	function Borrow_model()
 	{
 		parent::Query();

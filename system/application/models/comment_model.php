@@ -14,6 +14,11 @@
 ****************************************************************************/
 class Comment_model extends Query
 {
+	/*******************************************************************
+	 * Comment_model -- constructor for the Comment_model class
+	 * @pre - none
+	 * @post - none
+	*******************************************************************/
 	function Comment_model()
 	{
 		parent::Query();

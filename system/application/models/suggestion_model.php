@@ -11,6 +11,11 @@
 ****************************************************************************/
 class Suggestion_model extends Query
 {
+	/*******************************************************************
+	 * Suggestion_model -- constructor for the Suggestion_model class
+	 * @pre - none
+	 * @post - none
+	*******************************************************************/
 	function Suggestion_model()
 	{
 		parent::Query();

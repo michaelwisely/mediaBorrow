@@ -15,6 +15,11 @@
 ****************************************************************************/
 Class Media_model extends Query
 {
+	/*******************************************************************
+	 * Media_model -- constructor for the Media_model class
+	 * @pre - none
+	 * @post - none
+	*******************************************************************/
 	function Media_model()
 	{
 		parent::Query();

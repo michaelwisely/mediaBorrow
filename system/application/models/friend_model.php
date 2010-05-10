@@ -15,6 +15,11 @@
 ****************************************************************************/
 class Friend_model extends Query
 {
+	/*******************************************************************
+	 * Friend_model -- constructor for the Friend_model class
+	 * @pre - none
+	 * @post - none
+	*******************************************************************/
 	function Friend_model()
 	{
 		parent::Query();
