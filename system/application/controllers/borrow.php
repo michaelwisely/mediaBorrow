@@ -17,14 +17,27 @@
  *
  ****************************************************************************/
 class Borrow extends MY_controller {
-
+	/*******************************************************************
+	 * __construct -- constructor for Borrow class
+	 * @pre - none
+	 * @post - parent constructor is called and borrow and user models
+	 * 	are loaded.
+	*******************************************************************/
 	function __construct()
 	{
 		parent::__construct();
 		$this->load->model('borrow_model');
 		$this->load->model('media_model');
 	}
-	
+	/*******************************************************************
+	 * request -- make a request to borrow something.
+	 * @pre - user is logged in, segment 3 of the URL has the media id
+	 * 	which is to be borrowed
+	 * @post - infirmation regarding the borrow are loaded, if the user
+	 * 	already has a request on the item or is actively borrowing it
+	 * 	an error is loaded, otherwise the request is recorded
+	 * 	and a confirmation view is loaded.
+	*******************************************************************/
 	function request()
 	{
 		if($_POST == NULL)
@@ -74,7 +87,15 @@ class Borrow extends MY_controller {
 			$this->load->view('confirmation', $data);
 		}
 	}
-	
+	/*******************************************************************
+	 * confirmRequest -- records a confirmation on a borrow request
+	 * @pre - user is logged in, URL segment 3 is the media's id,
+	 * 	URL segment 4 is the id of the borrower
+	 * 	URL segment 5 is the starting date of the borrow
+	 * @post - the user is presented with the borrow confirmation view, and
+	 * 	if they choose to say yes, the borrow is changed to "confirmed"
+	 * 	status, and a confirmation view is loaded.
+	*******************************************************************/
 	function confirmRequest()
 	{
 		if($_POST == NULL)
@@ -114,7 +135,14 @@ class Borrow extends MY_controller {
 			$this->load->view('confirmation', $data);
 		}
 	}
-	
+	/*******************************************************************
+	 * denyRequest -- removes a borrow request
+	 * @pre - user is logged in, URL segment 3 is the media's id,
+	 * 	URL segment 4 is the id of the borrower
+	 * 	URL segment 5 is the starting date of the borrow
+	 * @post - the user is presented with the borrow confirmation view, and
+	 * 	if they choose to say yes, the borrow deleted from the table.
+	*******************************************************************/
 	function denyRequest()
 	{
 		if($_POST == NULL)
@@ -156,8 +184,15 @@ class Borrow extends MY_controller {
 			$this->load->view('confirmation', $data);
 		}
 	}
-	
-	
+	/*******************************************************************
+	 * handItOver -- records an active state on a borrow request
+	 * @pre - user is logged in, URL segment 3 is the media's id,
+	 * 	URL segment 4 is the id of the borrower
+	 * 	URL segment 5 is the starting date of the borrow
+	 * @post - the user is presented with the borrow confirmation view, and
+	 * 	if they choose to say yes, the borrow is changed to "active"
+	 * 	status, and a confirmation view is loaded.
+	*******************************************************************/
 	function handItOver()
 	{
 		if($_POST == NULL)
@@ -193,8 +228,15 @@ class Borrow extends MY_controller {
 			$this->load->view('confirmation', $data);
 		}
 	}
-
-	
+	/*******************************************************************
+	 * returnItem -- records a return on a borrow request
+	 * @pre - user is logged in, URL segment 3 is the media's id,
+	 * 	URL segment 4 is the id of the borrower
+	 * 	URL segment 5 is the starting date of the borrow
+	 * @post - the user is presented with the borrow confirmation view, and
+	 * 	if they choose to say yes, the borrow is changed to "returned"
+	 * 	status, and a confirmation view is loaded.
+	*******************************************************************/
 	function returnItem()
 	{
 		if($_POST == NULL)
