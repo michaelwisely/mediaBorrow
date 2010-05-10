@@ -27,7 +27,14 @@ class User_model extends Query
 	{
 		parent::Query();
 	}
-	
+	/*******************************************************************
+	 * login -- logs a user into the system
+	 * @pre - to be logged in, user must exist in the system
+	 * @param - $user_id = string, user's entered id
+	 * 	$password = string, user's entered password
+	 * @post - if username and password are correct, user is logged in
+	 * 	using Code Igniter sessions
+	*******************************************************************/
 	function login($user_id, $password)
 	{
 		//check to see if the username and password are correct
@@ -53,13 +60,22 @@ class User_model extends Query
 		
 		return $openSesame;
 	}
-	
+	/*******************************************************************
+	 * logout -- logs a user out of the system
+	 * @pre - user must be logged in
+	 * @post - user is logged out by code igniter sessions
+	*******************************************************************/
 	function logout()
 	{
 		$this->session->unset_userdata('user_id');
 		$this->session->set_userdata('logged_in', false);
 	}
-	
+	/*******************************************************************
+	 * user_exists -- checks to see if a user exists
+	 * @pre - none
+	 * @param - $user_id = string, user id
+	 * @post - retrns true if a user exists, and false otherwise.
+	*******************************************************************/
 	function user_exists($user_id)
 	{
 		$user_id = strtolower($user_id);
@@ -70,7 +86,12 @@ class User_model extends Query
 		else
 			return false;
 	}
-	
+	/*******************************************************************
+	 * email_exists -- checks to see if an email exists
+	 * @pre - none
+	 * @param - $email = string, an email address
+	 * @post - returns true if the email exists, otherwise false
+	*******************************************************************/
 	function email_exists($email)
 	{
 		$email = strtolower($email);
@@ -81,12 +102,23 @@ class User_model extends Query
 		else
 			return false;
 	}
-	
+	/*******************************************************************
+	 * currentUser -- gets the current user
+	 * @pre - user is logged in.
+	 * @post - uses a Code Igniter function call and returns the currently
+	 * 	logged-in user's id.
+	*******************************************************************/
 	function currentUser()
 	{
 		return $this->session->userdata('user_id');
 	}
-	
+	/*******************************************************************
+	 * userData -- returns the data for a user
+	 * @pre - user exists
+	 * @param - $user_id = string, user id
+	 * @post - returns an array containing user information. array keys
+	 * 	are the names of the columns in the user database.
+	*******************************************************************/
 	function userData($user_id)
 	{
 		$query = $this->query->userData($user_id);
@@ -102,7 +134,12 @@ class User_model extends Query
 		
 		return $userData;
 	}
-	
+	/*******************************************************************
+	 * getLibraryInformation -- gets a user's media library
+	 * @pre - user exists
+	 * @param - $user_id = string, user id
+	 * @post - retrns an array of arrays {'books':[], 'cds':[], 'movies':[]}
+	*******************************************************************/
 	function getLibraryInformation($user_id)
 	{
 		$query = $this->query->getUserLibrary($user_id);
@@ -150,7 +187,13 @@ class User_model extends Query
 		
 		return array("books"=>$books, "movies"=>$movies, "cds"=>$cds);
 	}
-	
+	/*******************************************************************
+	 * edit -- changes a user's profile info
+	 * @pre - user exists
+	 * @param - $new is an array with keys corresponding to the column names
+	 * 	in the user table in the database.
+	 * @post - user information is updated.
+	*******************************************************************/
 	function edit($new)
 	{
 		$new['user_id'] = $this->currentUser();
